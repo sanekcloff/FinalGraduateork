@@ -8,7 +8,7 @@ namespace SalesServices.Entities
         public User()
         {
             UserProducts = new HashSet<UserProduct>();
-            UserServices= new HashSet<UserService>();
+            UserServices= new HashSet<UserSvc>();
             FavoriteUserProducts= new HashSet<FavoriteUserProduct>();
         }
 
@@ -23,7 +23,7 @@ namespace SalesServices.Entities
         public UserProfile UserProfile { get; set; } = null!;
 
         public ICollection<UserProduct> UserProducts { get; set; } = null!;
-        public ICollection<UserService> UserServices { get; set; } = null!;
+        public ICollection<UserSvc> UserServices { get; set; } = null!;
         public ICollection<FavoriteUserProduct> FavoriteUserProducts { get; set; } = null!;
     }
 }

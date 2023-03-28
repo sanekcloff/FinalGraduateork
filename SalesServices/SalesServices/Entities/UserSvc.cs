@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SalesServices.Entities
 {
-    public class UserService
+    public class UserSvc
     {
         public int ID { get; set; }
 

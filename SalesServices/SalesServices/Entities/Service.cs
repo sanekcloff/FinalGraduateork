@@ -10,7 +10,7 @@ namespace SalesServices.Entities
     {
         public Service()
         {
-            UserServices = new HashSet<UserService>();
+            UserServices = new HashSet<UserSvc>();
         }
 
         public int ID { get; set; }
@@ -20,6 +20,6 @@ namespace SalesServices.Entities
         public decimal CostPerHour { get; set; }
         public DateTime DateOfAdd { get; set; }
 
-        public ICollection<UserService> UserServices { get; set; } = null!;
+        public ICollection<UserSvc> UserServices { get; set; } = null!;
     }
 }

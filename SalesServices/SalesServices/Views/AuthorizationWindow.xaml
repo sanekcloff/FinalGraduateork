@@ -4,9 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SalesServices.Views"
+        xmlns:vm="clr-namespace:SalesServices.ViewModels"
         mc:Ignorable="d"
-        Title="AuthorizationWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="AuthorizationWindow" Height="200" Width="300">
+    <Window.DataContext>
+        <vm:AuthorizationViewModel/>
+    </Window.DataContext>
+    <StackPanel Orientation="Vertical"
+                VerticalAlignment="Center">
+        <TextBlock Text="Логин"/>
+        <TextBox Text="{Binding Login}"/>
+        <TextBlock Text="Пароль"/>
+        <TextBox Text="{Binding Password}"/>
+        <Button x:Name="AuthorizationButton"
+                Content="Авторизоваться"
+                Click="AuthorizationButton_Click"/>
+    </StackPanel>
 </Window>

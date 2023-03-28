@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SalesServices.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,16 @@ namespace SalesServices.Views
     /// </summary>
     public partial class AuthorizationWindow : Window
     {
+        private AuthorizationViewModel _viewModel;
         public AuthorizationWindow()
         {
             InitializeComponent();
+            _viewModel = (AuthorizationViewModel)DataContext;
+        }
+
+        private void AuthorizationButton_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.Authorization();
         }
     }
 }
