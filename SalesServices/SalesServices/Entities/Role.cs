@@ -15,7 +15,7 @@ namespace SalesServices.Entities
 
         public int ID { get; set; }
 
-        public string Ttitle { get; set; } = null!;
+        public string Title { get; set; } = null!;
 
         public ICollection<User> Users { get; set; }
     }

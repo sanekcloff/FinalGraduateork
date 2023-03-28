@@ -73,7 +73,6 @@ namespace SalesServices.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Picture")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProductCategoryId")
@@ -115,7 +114,7 @@ namespace SalesServices.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<string>("Ttitle")
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

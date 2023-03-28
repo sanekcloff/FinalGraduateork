@@ -19,19 +19,19 @@ namespace SalesServices.ViewModels
         public string Password { get => _password; set => Set(ref _password, value, nameof(Password)); }
 
         public UserService UserService { get; } = null!;
-        public ApplicationDbContext Ctx;
+        private ApplicationDbContext _ctx;
 
         public AuthorizationViewModel()
         {
-            Ctx=new ApplicationDbContext();
+            _ctx=new ApplicationDbContext();
 
-            UserService = new UserService(Ctx);
+            UserService = new UserService(_ctx);
         }
 
         public void Authorization()
         {
             var user = UserService.GetUser(Login, Password);
-            if (user != null) new MainWindow(user);
+            if (user != null) new MainWindow(user, _ctx).ShowDialog();
             else MessageBox.Show("Некоректные данные!");
         }
     }

@@ -20,7 +20,11 @@ namespace SalesServices.Services
 
         public User GetUser(string login, string password)
         {
-            return _ctx.Users.Include(u => u.UserProfile).FirstOrDefault(u => u.Login == login && u.Password == password);
+            return _ctx.Users.Include(u => u.UserProfile).Include(u=>u.Role).SingleOrDefault(u => u.Login == login && u.Password == password);
+        }
+        public ICollection<User> GetUsers()
+        {
+            return _ctx.Users.Include(u => u.UserProfile).Include(u=>u.Role).ToList();
         }
     }
 }

@@ -12,8 +12,8 @@ using SalesServices.Data;
 namespace SalesServices.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230327094211_SuckMyDick")]
-    partial class SuckMyDick
+    [Migration("20230328111452_v0.1")]
+    partial class v01
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,7 +76,6 @@ namespace SalesServices.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Picture")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProductCategoryId")
@@ -118,7 +117,7 @@ namespace SalesServices.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<string>("Ttitle")
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -288,7 +287,7 @@ namespace SalesServices.Migrations
                     b.ToTable("UserProfiles");
                 });
 
-            modelBuilder.Entity("SalesServices.Entities.UserService", b =>
+            modelBuilder.Entity("SalesServices.Entities.UserSvc", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -401,7 +400,7 @@ namespace SalesServices.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("SalesServices.Entities.UserService", b =>
+            modelBuilder.Entity("SalesServices.Entities.UserSvc", b =>
                 {
                     b.HasOne("SalesServices.Entities.Service", "Service")
                         .WithMany("UserServices")
