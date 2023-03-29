@@ -1,4 +1,5 @@
-﻿using SalesServices.ViewModels;
+﻿using SalesServices.Data;
+using SalesServices.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,25 +17,21 @@ using System.Windows.Shapes;
 namespace SalesServices.Views
 {
     /// <summary>
-    /// Логика взаимодействия для AuthorizationWindow.xaml
+    /// Логика взаимодействия для RegisterWindow.xaml
     /// </summary>
-    public partial class AuthorizationWindow : Window
+    public partial class RegisterWindow : Window
     {
-        private AuthorizationViewModel _viewModel;
-        public AuthorizationWindow()
+        private RegisterViewModel _viewModel;
+        public RegisterWindow(ApplicationDbContext ctx)
         {
             InitializeComponent();
-            _viewModel = (AuthorizationViewModel)DataContext;
-        }
-
-        private void AuthorizationButton_Click(object sender, RoutedEventArgs e)
-        {
-            _viewModel.Authorization();
+            _viewModel = new RegisterViewModel(ctx);
+            DataContext= _viewModel;
         }
 
         private void RegistrtionButton_Click(object sender, RoutedEventArgs e)
         {
-            _viewModel.Registration();
+            _viewModel.Register();
         }
     }
 }

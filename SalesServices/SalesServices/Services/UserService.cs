@@ -22,9 +22,19 @@ namespace SalesServices.Services
         {
             return _ctx.Users.Include(u => u.UserProfile).Include(u=>u.Role).SingleOrDefault(u => u.Login == login && u.Password == password);
         }
+        public User GetUser(string login)
+        {
+            return _ctx.Users.Include(u => u.UserProfile).Include(u => u.Role).SingleOrDefault(u => u.Login == login);
+        }
         public ICollection<User> GetUsers()
         {
             return _ctx.Users.Include(u => u.UserProfile).Include(u=>u.Role).ToList();
+        }
+        public void Insert(User user, UserProfile userProfile)
+        {
+            _ctx.Users.Add(user);
+            _ctx.UserProfiles.Add(userProfile);
+            _ctx.SaveChanges();
         }
     }
 }

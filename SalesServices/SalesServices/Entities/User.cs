@@ -17,7 +17,7 @@ namespace SalesServices.Entities
         public string Login { get; set; } = null!;
         public string Password { get; set; } = null!;
 
-        public int UserProfileId { get;set; }
+        public int RoleId { get;set; }
 
         public Role Role { get; set; } = null!;
         public UserProfile UserProfile { get; set; } = null!;

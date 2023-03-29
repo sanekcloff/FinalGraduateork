@@ -11,41 +11,79 @@
         <TabControl Background="Transparent"
                     BorderThickness="0">
             <TabItem Header="Товары">
-                <ListView Background="Transparent"
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0"
+                                 Margin="20,10"
+                                 Text="{Binding ProductSearch}"/>
+                        <StackPanel Grid.Column="1"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Right">
+                            <ComboBox Margin="20,10"
+                                      Width="150"
+                                      SelectedItem="{Binding SelectedProductFilther}"/>
+                            <ComboBox Margin="20,10"
+                                      Width="150"
+                                      SelectedItem="{Binding SelectedProductSort}"/>
+                        </StackPanel>
+                    </Grid>
+                    <ListView Background="Transparent"
                           ItemsSource="{Binding Products}"
-                          HorizontalContentAlignment="Stretch">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="ListViewItem">
-                                        <Border Background="Bisque" CornerRadius="10"
+                          HorizontalContentAlignment="Stretch"
+                          BorderThickness="0"
+                          Grid.Row="1"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListViewItem">
+                                            <Border Background="Orange" 
+                                                CornerRadius="10"
                                                 Margin="5"
-                                                HorizontalAlignment="Stretch">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="60"/>
-                                                    <ColumnDefinition/>
-                                                    <ColumnDefinition Width="100"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Image Grid.Column="0" Source="{Binding CorrectPicturePath}"/>
-                                                <StackPanel Grid.Column="1">
-                                                    <TextBlock Text="{Binding FullName}"/>
-                                                    <TextBlock Text="{Binding Description}"
-                                                               TextWrapping="WrapWithOverflow"/>
-                                                </StackPanel>
-                                                <TextBlock HorizontalAlignment="Right"
+                                                x:Name="Border">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="60"/>
+                                                        <ColumnDefinition/>
+                                                        <ColumnDefinition Width="100"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Grid.Column="0" 
+                                                       Source="{Binding CorrectPicturePath}"
+                                                       Margin="5,0,0,0"/>
+                                                    <StackPanel Grid.Column="1">
+                                                        <TextBlock Text="{Binding FullName}"/>
+                                                        <TextBlock Text="{Binding Description}"
+                                                               TextWrapping="Wrap"/>
+                                                    </StackPanel>
+                                                    <TextBlock HorizontalAlignment="Right"
                                                            VerticalAlignment="Center"
                                                            Grid.Column="2"
+                                                           Margin="0,0,5,0"
                                                            Text="{Binding Cost, ConverterCulture=ru-RU, StringFormat={}{0:c}}"/>
-                                            </Grid>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                </ListView>
+                                                </Grid>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter TargetName="Border" Property="Background" Value="OrangeRed"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </Grid>
             </TabItem>
             <TabItem Header="Категории товаров">
 

@@ -13,12 +13,11 @@ GO
 INSERT INTO [dbo].[Users]
            ([Login]
            ,[Password]
-           ,[UserProfileId]
            ,[RoleID])
      VALUES
-           ('admin','admin',1,1),
-		   ('employee','employee',2,2),
-		   ('user','user',3,3)
+           ('admin','admin',1),
+		   ('employee','employee',2),
+		   ('user','user',3)
 GO
 
 INSERT INTO [dbo].[UserProfiles]

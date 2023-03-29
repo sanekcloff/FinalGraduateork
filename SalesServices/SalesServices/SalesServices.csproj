@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Icons\Icon.ico" />
+    <None Remove="Resources\Icons\Logo.png" />
     <None Remove="Resources\Pictures\product_1.png" />
     <None Remove="Resources\Pictures\product_10.png" />
     <None Remove="Resources\Pictures\product_2.png" />
@@ -30,10 +32,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\Styles\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Resource Include="Resources\Icons\Icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Icons\Logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Pictures\product_1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

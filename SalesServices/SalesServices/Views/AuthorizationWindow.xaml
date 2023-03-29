@@ -6,18 +6,46 @@
         xmlns:local="clr-namespace:SalesServices.Views"
         xmlns:vm="clr-namespace:SalesServices.ViewModels"
         mc:Ignorable="d"
-        Title="AuthorizationWindow" Height="200" Width="300">
+        Title="Окно авторизации" Height="350" Width="250"
+        ResizeMode="NoResize"
+        Icon="\Resources\Icons\Icon.ico"
+        FontFamily="Cascadia Code"
+        Background="{StaticResource BackgroundDark}"
+        FontSize="14"
+        WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:AuthorizationViewModel/>
     </Window.DataContext>
     <StackPanel Orientation="Vertical"
-                VerticalAlignment="Center">
-        <TextBlock Text="Логин"/>
-        <TextBox Text="{Binding Login}"/>
-        <TextBlock Text="Пароль"/>
-        <TextBox Text="{Binding Password}"/>
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Width="175">
+        <Image Source="\Resources\Icons\Logo.png"
+                       Stretch="Uniform"
+                       Height="90"
+                       Margin="5,5,5,25"/>
+        <TextBlock Text="Логин"
+                   HorizontalAlignment="Center"
+                   Foreground="{StaticResource TextColor}"/>
+        <TextBox Text="{Binding Path=Login, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{StaticResource TextBoxStyle1}"
+                 Margin="0,0,0,15"/>
+        <TextBlock Text="Пароль"
+                   HorizontalAlignment="Center"
+                   Foreground="{StaticResource TextColor}"/>
+        <TextBox Text="{Binding Path=Password, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{StaticResource TextBoxStyle1}"/>
         <Button x:Name="AuthorizationButton"
                 Content="Авторизоваться"
-                Click="AuthorizationButton_Click"/>
+                Click="AuthorizationButton_Click"
+                Margin="0,20,0,5"
+                Style="{StaticResource ButtonStyle1}"/>
+        <Button x:Name="RegistrtionButton"
+                Content="Регистрация"
+                Width="90"
+                Height="20"
+                FontSize="10"
+                Style="{StaticResource ButtonStyle2}"
+                Click="RegistrtionButton_Click"/>
     </StackPanel>
 </Window>

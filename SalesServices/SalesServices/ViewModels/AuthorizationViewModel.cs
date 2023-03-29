@@ -34,5 +34,9 @@ namespace SalesServices.ViewModels
             if (user != null) new MainWindow(user, _ctx).ShowDialog();
             else MessageBox.Show("Некоректные данные!");
         }
+        public void Registration()
+        {
+            new RegisterWindow(_ctx).ShowDialog();
+        }
     }
 }

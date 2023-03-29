@@ -12,7 +12,7 @@ using SalesServices.Data;
 namespace SalesServices.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230328111452_v0.1")]
+    [Migration("20230329121932_v0.1")]
     partial class v01
     {
         /// <inheritdoc />
@@ -186,15 +186,12 @@ namespace SalesServices.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoleID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserProfileId")
+                    b.Property<int>("RoleId")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("RoleID");
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Users");
                 });
@@ -355,7 +352,7 @@ namespace SalesServices.Migrations
                 {
                     b.HasOne("SalesServices.Entities.Role", "Role")
                         .WithMany("Users")
-                        .HasForeignKey("RoleID")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
