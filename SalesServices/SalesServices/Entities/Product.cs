@@ -39,5 +39,8 @@ namespace SalesServices.Entities
             get => (Picture == string.Empty || Picture == null) 
                 ? @"\Resources\Pictures\product_9.png" : @$"\Resources\Pictures\{Picture}";
         }
+        public bool IsDiscount { get => Discount==1 ? false : true; }
+        public decimal CorrectCost { get => IsDiscount ? Cost*Discount : Cost; }
+        public int CorrectDiscount { get => (int)((1-Discount)*100); }
     }
 }

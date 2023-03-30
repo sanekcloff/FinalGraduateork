@@ -1,5 +1,4 @@
 ﻿using SalesServices.Data;
-using SalesServices.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,23 +11,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace SalesServices.Views
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для UserWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UserWindow : Page
     {
-
-        public MainWindow(User user, ApplicationDbContext ctx)
+        public UserWindow(ApplicationDbContext ctx)
         {
             InitializeComponent();
-            Title=$"{user.Role.Title}: {user.UserProfile.FullName}";
-            if (user.Role.ID == 1) MainFrame.Navigate(new AdminWindow(ctx));
-            else if (user.Role.ID==2) MainFrame.Navigate(new EmployeeWindow(ctx));
-            else MainFrame.Navigate(new UserWindow(ctx));
         }
     }
 }

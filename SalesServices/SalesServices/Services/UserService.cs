@@ -22,9 +22,9 @@ namespace SalesServices.Services
         {
             return _ctx.Users.Include(u => u.UserProfile).Include(u=>u.Role).SingleOrDefault(u => u.Login == login && u.Password == password);
         }
-        public User GetUser(string login)
+        public User GetUser(int id)
         {
-            return _ctx.Users.Include(u => u.UserProfile).Include(u => u.Role).SingleOrDefault(u => u.Login == login);
+            return _ctx.Users.Include(u => u.UserProfile).Include(u => u.Role).SingleOrDefault(u => u.ID == id);
         }
         public ICollection<User> GetUsers()
         {

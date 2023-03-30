@@ -29,24 +29,111 @@ namespace SalesServices.ViewModels
 
         #region Services
         public ProductService ProductService { get; }
-       
-
+        public UserService UserService { get; }
         #endregion
 
         #region Product properties & fields
         private string _productSearch;
-        private string _selectedProducttFilther;
+        private string _selectedProductFilther;
         private string _selectedProductSort;
+        private Product _selectedProduct;
 
-        public string ProductSearch { get => _productSearch; set => Set(ref _productSearch, value, nameof(ProductSearch)); }
-        public string SelectedProductFilther { get => _selectedProducttFilther; set => _selectedProducttFilther = value; }
-        public string SelectedProductSort { get => _selectedProductSort; set => _selectedProductSort = value; }
+        public string ProductSearch
+        {
+            get => _productSearch;
+            set
+            {
+                Set(ref _productSearch, value, nameof(ProductSearch));
+                UpdateProductsList();
+            }
+        }
+        public string SelectedProductFilther
+        {
+            get => _selectedProductFilther; 
+            set
+            {
+                Set(ref _selectedProductFilther, value, nameof(SelectedProductFilther));
+                UpdateProductsList();
+            }
+        }
+        public string SelectedProductSort
+        {
+            get => _selectedProductSort; 
+            set
+            {
+                Set(ref _selectedProductSort, value, nameof(SelectedProductSort));
+                UpdateProductsList();
+            }
+        }
+        public Product SelectedProduct { get => _selectedProduct; set => Set(ref _selectedProduct, value, nameof(SelectedProduct)); }
+        public List<string> ProductFilthers { get; } = new List<string>()
+        {
+            "Все категории"
+        };
+        public List<string> ProductSortings { get; } = new List<string>()
+        {
+            "Без сортировки",
+            "По цене (убыв.)",
+            "По цене (возр.)",
+            "По категории (убыв.)",
+            "По категории (возр.)",
+            "По дате добавления (убыв.)",
+            "По дате добавления (возр.)"
+        };
         #endregion
         public AdminViewModel(ApplicationDbContext ctx)
         {
-            ProductService = new ProductService(ctx);
+            ProductService = new(ctx);
+            UserService = new(ctx);
 
-            Products=new List<Product>(ProductService.GetProducts());
+            UpdateProductsList();
+            ProductFilthers.AddRange(ctx.ProductCategories.Select(category => category.Title));
+            
+            SelectedProductFilther = ProductFilthers[0];
+            SelectedProductSort = ProductSortings[0];
         }
+
+        #region Product Methods
+        public void UpdateProductsList()
+        {
+            Products = SortProduct(SearchProduct(FiltherProduct(ProductService.GetProducts()))).ToList();
+        }
+        public ICollection<Product> SearchProduct(ICollection<Product> products)
+        {
+            if (ProductSearch == string.Empty || ProductSearch==null)
+                return products;
+            else
+                return products
+                    .Where(p => p.Title.ToLower().Contains(ProductSearch.ToLower()) 
+                    || p.Description.ToLower().Contains(ProductSearch.ToLower()))
+                    .ToList();
+        }
+        public ICollection<Product> FiltherProduct(ICollection<Product> products)
+        {
+            if (SelectedProductFilther == ProductFilthers[0])
+                return products;
+            else
+                return products
+                    .Where(p => p.ProductCategory.Title == SelectedProductFilther)
+                    .ToList();
+        }
+        public ICollection<Product> SortProduct(ICollection<Product> products)
+        {
+            if (SelectedProductSort == ProductSortings[1])
+                return products.OrderByDescending(p => p.CorrectCost).ToList();
+            else if (SelectedProductSort == ProductSortings[2])
+                return products.OrderBy(p => p.CorrectCost).ToList();
+            else if (SelectedProductSort == ProductSortings[3])
+                return products.OrderByDescending(p => p.ProductCategory.Title).ToList();
+            else if (SelectedProductSort == ProductSortings[4])
+                return products.OrderBy(p => p.ProductCategory.Title).ToList();
+            else if (SelectedProductSort == ProductSortings[5])
+                return products.OrderByDescending(p => p.DateOfAdd).ToList();
+            else if (SelectedProductSort == ProductSortings[6])
+                return products.OrderBy(p => p.DateOfAdd).ToList();
+            else
+                return products;
+        }
+        #endregion
     }
 }

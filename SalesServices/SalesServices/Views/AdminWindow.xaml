@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:SalesServices.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AdminWindow">
+      FontFamily="Cascadia Code"
+      FontSize="14">
     <Grid>
         <TabControl Background="Transparent"
                     BorderThickness="0">
@@ -23,66 +24,25 @@
                         </Grid.ColumnDefinitions>
                         <TextBox Grid.Column="0"
                                  Margin="20,10"
-                                 Text="{Binding ProductSearch}"/>
+                                 Text="{Binding ProductSearch, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource TextBoxStyle1}"/>
                         <StackPanel Grid.Column="1"
                                     Orientation="Horizontal"
                                     HorizontalAlignment="Right">
                             <ComboBox Margin="20,10"
                                       Width="150"
-                                      SelectedItem="{Binding SelectedProductFilther}"/>
+                                      SelectedItem="{Binding SelectedProductFilther, UpdateSourceTrigger=PropertyChanged}"
+                                      ItemsSource="{Binding ProductFilthers}"/>
                             <ComboBox Margin="20,10"
                                       Width="150"
-                                      SelectedItem="{Binding SelectedProductSort}"/>
+                                      SelectedItem="{Binding SelectedProductSort, UpdateSourceTrigger=PropertyChanged}"
+                                      ItemsSource="{Binding ProductSortings}"/>
                         </StackPanel>
                     </Grid>
-                    <ListView Background="Transparent"
-                          ItemsSource="{Binding Products}"
-                          HorizontalContentAlignment="Stretch"
-                          BorderThickness="0"
-                          Grid.Row="1"
-                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                          ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="ListViewItem">
-                                            <Border Background="Orange" 
-                                                CornerRadius="10"
-                                                Margin="5"
-                                                x:Name="Border">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="60"/>
-                                                        <ColumnDefinition/>
-                                                        <ColumnDefinition Width="100"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Image Grid.Column="0" 
-                                                       Source="{Binding CorrectPicturePath}"
-                                                       Margin="5,0,0,0"/>
-                                                    <StackPanel Grid.Column="1">
-                                                        <TextBlock Text="{Binding FullName}"/>
-                                                        <TextBlock Text="{Binding Description}"
-                                                               TextWrapping="Wrap"/>
-                                                    </StackPanel>
-                                                    <TextBlock HorizontalAlignment="Right"
-                                                           VerticalAlignment="Center"
-                                                           Grid.Column="2"
-                                                           Margin="0,0,5,0"
-                                                           Text="{Binding Cost, ConverterCulture=ru-RU, StringFormat={}{0:c}}"/>
-                                                </Grid>
-                                            </Border>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsSelected" Value="True">
-                                                    <Setter TargetName="Border" Property="Background" Value="OrangeRed"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                    </ListView>
+                    <ListView ItemsSource="{Binding Products}"
+                              SelectedItem="{Binding SelectedProduct}"
+                              Grid.Row="1"
+                              Style="{StaticResource ProductsListView}"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Категории товаров">
