@@ -24,7 +24,7 @@
                                             <ColumnDefinition Width="8"/>
                                             <ColumnDefinition Width="120"/>
                                             <ColumnDefinition/>
-                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="120"/>
                                         </Grid.ColumnDefinitions>
                                         <Border Grid.Column="0"
                                                 Background="{StaticResource ItemColor}"
@@ -47,7 +47,8 @@
                                                        FontWeight="Light"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Vertical"
-                                                    Grid.Column="3">
+                                                    Grid.Column="3"
+                                                    HorizontalAlignment="Right">
                                             <TextBlock Text="{Binding CorrectDiscount, StringFormat=Скидка: {0}%}"
                                                        x:Name="DiscountText"
                                                        Visibility="Collapsed"
@@ -76,6 +77,76 @@
                                     <DataTrigger Binding="{Binding IsDiscount}" Value="true">
                                         <Setter TargetName="DiscountText" Property="Visibility" Value="Visible"/>
                                         <Setter TargetName="CostText" Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="ListView" x:Key="ServicesListView">
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <Border Margin="5"
+                                        Background="Transparent">
+                                    <Grid x:Name="Grid">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="8"/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="100"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Grid.Column="0"
+                                                Background="{StaticResource ItemColor}"
+                                                CornerRadius="4,0,0,4"
+                                                x:Name="Border"/>
+                                        <StackPanel Orientation="Vertical"
+                                                    Grid.Column="1"
+                                                    Margin="10,0,0,0">
+                                            <TextBlock Text="{Binding Title}"
+                                                       Foreground="{StaticResource TextColor}"/>
+                                            <TextBlock Text="{Binding Description}"
+                                                       TextWrapping="Wrap"
+                                                       Foreground="{StaticResource TextColor}"
+                                                       FontSize="13"
+                                                       FontWeight="Light"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical"
+                                                    Grid.Column="2">
+                                            <TextBlock Text="Цна за час:"
+                                                       Visibility="Collapsed"
+                                                       Foreground="{StaticResource TextColor}"/>
+                                            <TextBlock Foreground="{StaticResource TextColor}"
+                                                       Text="{Binding CostPerHour, ConverterCulture=ru-RU, StringFormat={}{0:c}}"
+                                                       x:Name="FixedText"/>
+                                            <TextBlock Foreground="{StaticResource TextColor}"
+                                                       Text="Договорная"
+                                                       x:Name="NegotiableText"
+                                                       Visibility="Collapsed"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="{StaticResource ItemColorMouseOver}"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="{StaticResource ItemColorSelected}"/>
+                                    </Trigger>
+                                    <DataTrigger Binding="{Binding IsNegotiable}" Value="true">
+                                        <Setter TargetName="FixedText" Property="Visibility" Value="Collapsed"/>
+                                        <Setter TargetName="NegotiableText" Property="Visibility" Value="Visible"/>
                                     </DataTrigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,5 +22,8 @@ namespace SalesServices.Entities
         public DateTime DateOfAdd { get; set; }
 
         public ICollection<UserSvc> UserServices { get; set; } = null!;
+
+        [NotMapped]
+        public bool IsNegotiable { get => CostPerHour>0 ? false : true; }
     }
 }

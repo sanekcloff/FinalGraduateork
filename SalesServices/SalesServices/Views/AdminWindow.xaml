@@ -45,11 +45,35 @@
                               Style="{StaticResource ProductsListView}"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Категории товаров">
-
-            </TabItem>
             <TabItem Header="Услуги">
-
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0"
+                                 Margin="20,10"
+                                 Text="{Binding ServiceSearch, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource TextBoxStyle1}"/>
+                        <StackPanel Grid.Column="1"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Right">
+                            <ComboBox Margin="20,10"
+                                      Width="150"
+                                      SelectedItem="{Binding SelectedServiceSort, UpdateSourceTrigger=PropertyChanged}"
+                                      ItemsSource="{Binding ServiceSortings}"/>
+                        </StackPanel>
+                    </Grid>
+                    <ListView ItemsSource="{Binding Services}"
+                              SelectedItem="{Binding SelectedService}"
+                              Grid.Row="1"
+                              Style="{StaticResource ServicesListView}"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Пользователи">
 

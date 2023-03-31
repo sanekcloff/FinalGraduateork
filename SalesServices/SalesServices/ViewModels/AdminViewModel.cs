@@ -30,6 +30,7 @@ namespace SalesServices.ViewModels
         #region Services
         public ProductService ProductService { get; }
         public UserService UserService { get; }
+        public ServiceService ServiceService { get; }
         #endregion
 
         #region Product properties & fields
@@ -81,16 +82,53 @@ namespace SalesServices.ViewModels
             "По дате добавления (возр.)"
         };
         #endregion
+
+        #region Service properties & fields
+        private string _serviceSearch;
+        private string _selectedServiceSort;
+        private Service _selectedService;
+
+        public string ServiceSearch
+        {
+            get => _serviceSearch;
+            set
+            {
+                Set(ref _serviceSearch, value, nameof(ServiceSearch));
+                UpdateServicesList();
+            }
+        }
+        public string SelectedServiceSort
+        {
+            get => _selectedServiceSort;
+            set
+            {
+                Set(ref _selectedServiceSort, value, nameof(SelectedServiceSort));
+                UpdateServicesList();
+            }
+        }
+        public Service SelectedService { get => _selectedService; set => Set(ref _selectedService, value, nameof(SelectedService)); }
+        public List<string> ServiceSortings { get; } = new List<string>()
+        {
+            "Без сортировки",
+            "По цене (убыв.)",
+            "По цене (возр.)",
+            "По дате добавления (убыв.)",
+            "По дате добавления (возр.)"
+        };
+        #endregion
         public AdminViewModel(ApplicationDbContext ctx)
         {
             ProductService = new(ctx);
             UserService = new(ctx);
+            ServiceService = new(ctx);
 
             UpdateProductsList();
+            UpdateServicesList();
             ProductFilthers.AddRange(ctx.ProductCategories.Select(category => category.Title));
             
             SelectedProductFilther = ProductFilthers[0];
             SelectedProductSort = ProductSortings[0];
+            SelectedServiceSort = ServiceSortings[0];
         }
 
         #region Product Methods
@@ -133,6 +171,36 @@ namespace SalesServices.ViewModels
                 return products.OrderBy(p => p.DateOfAdd).ToList();
             else
                 return products;
+        }
+        #endregion
+
+        #region Service Methods
+        public void UpdateServicesList()
+        {
+            Services = SortService(SearchService(ServiceService.GetServices())).ToList();
+        }
+        public ICollection<Service> SearchService(ICollection<Service> services)
+        {
+            if (ServiceSearch == string.Empty || ServiceSearch == null)
+                return services;
+            else
+                return services
+                    .Where(p => p.Title.ToLower().Contains(ServiceSearch.ToLower())
+                    || p.Description.ToLower().Contains(ServiceSearch.ToLower()))
+                    .ToList();
+        }
+        public ICollection<Service> SortService(ICollection<Service> services)
+        {
+            if (SelectedServiceSort == ServiceSortings[1])
+                return services.OrderByDescending(s => s.CostPerHour).ToList();
+            else if (SelectedServiceSort == ServiceSortings[2])
+                return services.OrderBy(s => s.CostPerHour).ToList();
+            else if (SelectedServiceSort == ServiceSortings[3])
+                return services.OrderByDescending(s => s.DateOfAdd).ToList();
+            else if (SelectedServiceSort == ServiceSortings[4])
+                return services.OrderBy(s => s.DateOfAdd).ToList();
+            else
+                return services;
         }
         #endregion
     }
