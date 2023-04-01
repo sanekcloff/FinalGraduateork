@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace SalesServices.Entities
         public int ID { get; set; }
 
         public DateTime DateOfOrder { get; set; }
-        public DateTime DateOfCompletion { get; set; }
+        public DateTime? DateOfCompletion { get; set; }
 
         public int ServiceId { get; set; }
         public int UserId { get; set; }

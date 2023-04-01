@@ -31,6 +31,8 @@ namespace SalesServices.ViewModels
         public ProductService ProductService { get; }
         public UserService UserService { get; }
         public ServiceService ServiceService { get; }
+        public UserProductsService UserProductsService { get; }
+        public UserServicesService UserServicesService { get; }
         #endregion
 
         #region Product properties & fields
@@ -168,23 +170,133 @@ namespace SalesServices.ViewModels
             "По дате регистрации (возр.)"
         };
         #endregion
+
+        #region UserProducts properties & fields
+        private string _userProductSearch;
+        private string _selectedUserProductSort;
+        private string _selectedUserProductFilther;
+        private UserProduct _selectedUserProduct;
+
+        public string UserProductSearch
+        {
+            get => _userProductSearch;
+            set
+            {
+                Set(ref _userProductSearch, value, nameof(UserProductSearch));
+                UpdateUserProductsList();
+            }
+        }
+        public string SelectedUserProductSort
+        {
+            get => _selectedUserProductSort;
+            set
+            {
+                Set(ref _selectedUserProductSort, value, nameof(SelectedUserProductSort));
+                UpdateUserProductsList();
+            }
+        }
+        public string SelectedUserProductFilther
+        {
+            get => _selectedUserProductFilther;
+            set
+            {
+                Set(ref _selectedUserProductFilther, value, nameof(SelectedUserProductFilther));
+                UpdateUserProductsList();
+            }
+        }
+        public UserProduct SelectedUserProduct { get => _selectedUserProduct; set => Set(ref _selectedUserProduct, value, nameof(SelectedUserProduct)); }
+        public List<string> UserProductFilthers { get; } = new List<string>()
+        {
+            "Все статусы"
+        };
+        public List<string> UserProductSortings { get; } = new List<string>()
+        {
+            "Без сортировки",
+            "По количеству (убыв.)",
+            "По количеству (возр.)",
+            "По новизне (убыв.)",
+            "По новизне (возр.)",
+            "По стоимости (убыв.)",
+            "По стоимости (возр.)"
+        };
+        #endregion
+
+        #region UserProducts properties & fields
+        private string _userServiceSearch;
+        private string _selectedUserServiceSort;
+        private string _selectedUserServiceFilther;
+        private UserSvc _selectedUserService;
+
+        public string UserServiceSearch
+        {
+            get => _userServiceSearch;
+            set
+            {
+                Set(ref _userServiceSearch, value, nameof(UserServiceSearch));
+                UpdateUserServicesList();
+            }
+        }
+        public string SelectedUserServiceSort
+        {
+            get => _selectedUserServiceSort;
+            set
+            {
+                Set(ref _selectedUserServiceSort, value, nameof(SelectedUserServiceSort));
+                UpdateUserServicesList();
+            }
+        }
+        public string SelectedUserServiceFilther
+        {
+            get => _selectedUserServiceFilther;
+            set
+            {
+                Set(ref _selectedUserServiceFilther, value, nameof(SelectedUserServiceFilther));
+                UpdateUserServicesList();
+            }
+        }
+        public UserSvc SelectedUserService { get => _selectedUserService; set => Set(ref _selectedUserService, value, nameof(SelectedUserService)); }
+        public List<string> UserServiceFilthers { get; } = new List<string>()
+        {
+            "Все статусы"
+        };
+        public List<string> UserServiceSortings { get; } = new List<string>()
+        {
+            "Без сортировки",
+            "По новизне (убыв.)",
+            "По новизне (возр.)",
+            "По стоимости (убыв.)",
+            "По стоимости (возр.)"
+        };
+        #endregion
+
         public AdminViewModel(ApplicationDbContext ctx)
         {
             ProductService = new(ctx);
             UserService = new(ctx);
             ServiceService = new(ctx);
+            UserProductsService = new(ctx);
+            UserServicesService = new(ctx);
 
             UpdateProductsList();
             UpdateServicesList();
             UpdateUsersList();
+            UpdateUserProductsList();
+            UpdateUserServicesList();
+
             ProductFilthers.AddRange(ctx.ProductCategories.Select(category => category.Title));
             UserFilthers.AddRange(ctx.Roles.Select(role => role.Title));
+            UserProductFilthers.AddRange(ctx.Statuses.Select(statuses => statuses.Title));
+            UserServiceFilthers.AddRange(ctx.Statuses.Select(statuses=>statuses.Title));
             
             SelectedProductFilther = ProductFilthers[0];
             SelectedProductSort = ProductSortings[0];
             SelectedServiceSort = ServiceSortings[0];
             SelectedUserSort= UserSortings[0];
             SelectedUserFilther = UserFilthers[0];
+            SelectedUserProductFilther = UserProductFilthers[0];
+            SelectedUserProductSort = UserProductSortings[0];
+            SelectedUserServiceFilther = UserServiceFilthers[0];
+            SelectedUserServiceSort = UserServiceSortings[0];
         }
 
         #region Product Methods
@@ -303,6 +415,88 @@ namespace SalesServices.ViewModels
                 return users.OrderBy(u => u.UserProfile.DateOfRegister).ToList();
             else
                 return users;
+        }
+        #endregion
+
+        #region UserProducts Methods
+        public void UpdateUserProductsList()
+        {
+            UserProducts = SortUserProduct(SearchUserProduct(FiltherUserProduct(UserProductsService.GetUserProducts()))).ToList();
+        }
+        public ICollection<UserProduct> SearchUserProduct(ICollection<UserProduct> userProducts)
+        {
+            if (UserProductSearch == string.Empty || UserProductSearch == null)
+                return userProducts;
+            else
+                return userProducts
+                    .Where(up => up.Product.Title.ToLower().Contains(UserProductSearch.ToLower())
+                    || up.User.UserProfile.FullName.ToLower().Contains(UserProductSearch.ToLower()))
+                    .ToList();
+        }
+        public ICollection<UserProduct> FiltherUserProduct(ICollection<UserProduct> userProducts)
+        {
+            if (SelectedUserProductFilther == UserProductFilthers[0])
+                return userProducts;
+            else
+                return userProducts
+                    .Where(up => up.Status.Title==SelectedUserProductFilther)
+                    .ToList();
+        }
+        public ICollection<UserProduct> SortUserProduct(ICollection<UserProduct> userProducts)
+        {
+            if (SelectedUserSort == UserSortings[1])
+                return userProducts.OrderByDescending(up => up.Quantity).ToList();
+            else if (SelectedUserSort == UserSortings[2])
+                return userProducts.OrderBy(up => up.Quantity).ToList();
+            else if (SelectedUserSort == UserSortings[3])
+                return userProducts.OrderByDescending(up => up.DateOfOrder).ToList();
+            else if (SelectedUserSort == UserSortings[4])
+                return userProducts.OrderBy(up => up.DateOfOrder).ToList();
+            else if (SelectedUserSort == UserSortings[5])
+                return userProducts.OrderByDescending(up => up.FullCost).ToList();
+            else if (SelectedUserSort == UserSortings[6])
+                return userProducts.OrderBy(up => up.FullCost).ToList();
+            else
+                return userProducts;
+        }
+        #endregion
+
+        #region UserProducts Methods
+        public void UpdateUserServicesList()
+        {
+            UserServices = SortUserService(SearchUserService(FiltherUserService(UserServicesService.GetUserServices()))).ToList();
+        }
+        public ICollection<UserSvc> SearchUserService(ICollection<UserSvc> userServices)
+        {
+            if (UserServiceSearch == string.Empty || UserServiceSearch == null)
+                return userServices;
+            else
+                return userServices
+                    .Where(up => up.Service.Title.ToLower().Contains(UserServiceSearch.ToLower())
+                    || up.User.UserProfile.FullName.ToLower().Contains(UserServiceSearch.ToLower()))
+                    .ToList();
+        }
+        public ICollection<UserSvc> FiltherUserService(ICollection<UserSvc> userServices)
+        {
+            if (SelectedUserServiceFilther == UserServiceFilthers[0])
+                return userServices;
+            else
+                return userServices
+                    .Where(us => us.Status.Title == SelectedUserServiceFilther)
+                    .ToList();
+        }
+        public ICollection<UserSvc> SortUserService(ICollection<UserSvc> userServices)
+        {
+            if (SelectedUserSort == UserSortings[3])
+                return userServices.OrderByDescending(us => us.DateOfOrder).ToList();
+            else if (SelectedUserSort == UserSortings[4])
+                return userServices.OrderBy(us => us.DateOfOrder).ToList();
+            else if (SelectedUserSort == UserSortings[5])
+                return userServices.OrderByDescending(us => us.Service.CostPerHour).ToList();
+            else if (SelectedUserSort == UserSortings[6])
+                return userServices.OrderBy(us => us.Service.CostPerHour).ToList();
+            else
+                return userServices;
         }
         #endregion
     }

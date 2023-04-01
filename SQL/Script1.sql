@@ -22,8 +22,8 @@ INSERT INTO [dbo].[UserProfiles]
            ([LastName],[FirstName],[MiddleName],[DateOfBirth],[Phone],[Email],[DateOfRegister],[NumberOfPurchases],[NumberOfServices],[UserId])
      VALUES
            ('Аксёнов','Александр','Игоревич','20-03-2003','34534534','jop@gmil.cum','28-03-2023',0,0,1),
-		   ('Аксенов','Александр','Игоревич','20-03-2003','34534534','jop@gmil.cum','28-03-2023',0,0,2),
-		   ('Аксионов','Александр','Игоревич','20-03-2003','34534534','jop@gmil.cum','28-03-2023',0,0,3)
+		   ('Аксенов','Александр','Игоревич','20-03-2003','34534534','jop@gmil.cum','28-03-2023',1,0,2),
+		   ('Аксионов','Александр','Игоревич','20-03-2003','34534534','jop@gmil.cum','28-03-2023',0,1,3)
 GO
 
 INSERT INTO [dbo].[ProductCategories]
@@ -105,3 +105,15 @@ INSERT INTO [dbo].[Statuses]
 		   ('Завершён')
 GO
 
+
+INSERT INTO [dbo].[UserProducts]
+           ([Quantity],[DateOfOrder],[DateOfCompletion],[ProductId],[UserId],[StatusId])
+     VALUES
+           (3,'01-04-2023',null,1,2,1)
+GO
+
+INSERT INTO [dbo].[UserServices]
+           ([DateOfOrder],[DateOfCompletion],[ServiceId],[UserId],[StatusId])
+     VALUES
+           ('02-03-2023',null,3,3,2)
+GO

@@ -240,4 +240,153 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="ListView" x:Key="UserProductsListView">
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <Border Margin="5"
+                                        Background="Transparent">
+                                    <Grid x:Name="Grid">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="8"/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="120"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Grid.Column="0"
+                                                Background="{StaticResource ItemColor}"
+                                                CornerRadius="4,0,0,4"
+                                                x:Name="Border"/>
+                                        <StackPanel Orientation="Horizontal"
+                                                    Grid.Column="1"
+                                                    Margin="10,0,0,0">
+                                            <Image Source="{Binding Product.CorrectPicturePath}"
+                                               Margin="3"
+                                               Stretch="Uniform"
+                                               Width="100"
+                                               x:Name="Image"/>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding User.UserProfile.FullName,StringFormat=Заказчик: {0}}"
+                                                           Foreground="{StaticResource TextColor}"
+                                                           x:Name="FullNameText"/>
+                                                <TextBlock Text="{Binding Product.Title,StringFormat=Товар: {0}}"
+                                                           Foreground="{StaticResource TextColor}"/>
+                                                <TextBlock Text="{Binding Quantity,StringFormat=Количество: {0}}"
+                                                           Foreground="{StaticResource TextColor}"
+                                                           FontSize="12"
+                                                           FontWeight="Light"/>
+                                                <TextBlock Text="{Binding Status.Title,StringFormat=Статус: {0}}"
+                                                           Foreground="{StaticResource TextColor}"
+                                                           FontSize="12"
+                                                           FontWeight="Light"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="2"
+                                                   HorizontalAlignment="Right"
+                                                   VerticalAlignment="Top"
+                                                   Foreground="{StaticResource TextColor}"
+                                                   Text="{Binding FullCost, ConverterCulture=ru-RU, StringFormat={}{0:c}}"
+                                                   Margin="0,0,10,0"/>
+                                    </Grid>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="{StaticResource ItemColorMouseOver}"/>
+                                        <Setter TargetName="Image" Property="Width" Value="120"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="{StaticResource ItemColorSelected}"/>
+                                        <Setter TargetName="Image" Property="Width" Value="120"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="ListView" x:Key="UserServicesListView">
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <Border Margin="5"
+                                        Background="Transparent">
+                                    <Grid x:Name="Grid">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="8"/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="120"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Grid.Column="0"
+                                                Background="{StaticResource ItemColor}"
+                                                CornerRadius="4,0,0,4"
+                                                x:Name="Border"/>
+                                        <StackPanel Orientation="Horizontal"
+                                                    Grid.Column="1"
+                                                    Margin="10,0,0,0">
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding User.UserProfile.FullName,StringFormat=Заказчик: {0}}"
+                                                           Foreground="{StaticResource TextColor}"
+                                                           x:Name="FullNameText"/>
+                                                <TextBlock Text="{Binding Service.Title,StringFormat=Услуга: {0}}"
+                                                           Foreground="{StaticResource TextColor}"/>
+                                                <TextBlock Text="{Binding Status.Title,StringFormat=Статус: {0}}"
+                                                           Foreground="{StaticResource TextColor}"
+                                                           FontSize="12"
+                                                           FontWeight="Light"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="2"
+                                                    HorizontalAlignment="Right"
+                                                    VerticalAlignment="Top"
+                                                    Margin="0,0,10,0">
+                                            <TextBlock Foreground="{StaticResource TextColor}"
+                                                   Text="{Binding Service.CostPerHour, ConverterCulture=ru-RU, StringFormat={}{0:c}}"
+                                                       x:Name="CostText"/>
+                                            <TextBlock Foreground="{StaticResource TextColor}"
+                                                   Text="Договорная"
+                                                       x:Name="NegotiableText"
+                                                       Visibility="Collapsed"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="{StaticResource ItemColorMouseOver}"/>
+                                        <Setter TargetName="FullNameText" Property="FontSize" Value="16"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="{StaticResource ItemColorSelected}"/>
+                                        <Setter TargetName="FullNameText" Property="FontSize" Value="16"/>
+                                    </Trigger>
+                                    <DataTrigger Binding="{Binding Service.IsNegotiable}" Value="true">
+                                        <Setter TargetName="CostText" Property="Visibility" Value="Collapsed"/>
+                                        <Setter TargetName="NegotiableText" Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

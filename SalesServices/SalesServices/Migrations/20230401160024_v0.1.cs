@@ -148,7 +148,7 @@ namespace SalesServices.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     DateOfOrder = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateOfCompletion = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateOfCompletion = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     StatusId = table.Column<int>(type: "int", nullable: false)
@@ -211,7 +211,7 @@ namespace SalesServices.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DateOfOrder = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateOfCompletion = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateOfCompletion = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ServiceId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     StatusId = table.Column<int>(type: "int", nullable: false)

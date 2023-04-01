@@ -201,7 +201,7 @@ namespace SalesServices.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<DateTime>("DateOfCompletion")
+                    b.Property<DateTime?>("DateOfCompletion")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateOfOrder")
@@ -289,7 +289,7 @@ namespace SalesServices.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<DateTime>("DateOfCompletion")
+                    b.Property<DateTime?>("DateOfCompletion")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateOfOrder")

@@ -110,10 +110,72 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Товары пользователей">
-
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0"
+                                 Margin="20,10"
+                                 Text="{Binding UserProductSearch, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource TextBoxStyle1}"/>
+                        <StackPanel Grid.Column="1"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Right">
+                            <ComboBox Margin="20,10"
+                                      Width="150"
+                                      SelectedItem="{Binding SelectedUserProductFilther, UpdateSourceTrigger=PropertyChanged}"
+                                      ItemsSource="{Binding UserProductFilthers}"/>
+                            <ComboBox Margin="20,10"
+                                      Width="150"
+                                      SelectedItem="{Binding SelectedUserProductSort, UpdateSourceTrigger=PropertyChanged}"
+                                      ItemsSource="{Binding UserProductSortings}"/>
+                        </StackPanel>
+                    </Grid>
+                    <ListView ItemsSource="{Binding UserProducts}"
+                              SelectedItem="{Binding SelectedUserProduct}"
+                              Grid.Row="1"
+                              Style="{StaticResource UserProductsListView}"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Услуги пользователей">
-
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0"
+                                 Margin="20,10"
+                                 Text="{Binding UserServiceSearch, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource TextBoxStyle1}"/>
+                        <StackPanel Grid.Column="1"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Right">
+                            <ComboBox Margin="20,10"
+                                      Width="150"
+                                      SelectedItem="{Binding SelectedUserServiceFilther, UpdateSourceTrigger=PropertyChanged}"
+                                      ItemsSource="{Binding UserServiceFilthers}"/>
+                            <ComboBox Margin="20,10"
+                                      Width="150"
+                                      SelectedItem="{Binding SelectedUserServiceSort, UpdateSourceTrigger=PropertyChanged}"
+                                      ItemsSource="{Binding UserServiceSortings}"/>
+                        </StackPanel>
+                    </Grid>
+                    <ListView ItemsSource="{Binding UserServices}"
+                              SelectedItem="{Binding SelectedUserService}"
+                              Grid.Row="1"
+                              Style="{StaticResource UserServicesListView}"/>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

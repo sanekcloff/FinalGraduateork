@@ -12,7 +12,7 @@ using SalesServices.Data;
 namespace SalesServices.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230329121932_v0.1")]
+    [Migration("20230401160024_v0.1")]
     partial class v01
     {
         /// <inheritdoc />
@@ -204,7 +204,7 @@ namespace SalesServices.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<DateTime>("DateOfCompletion")
+                    b.Property<DateTime?>("DateOfCompletion")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateOfOrder")
@@ -292,7 +292,7 @@ namespace SalesServices.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<DateTime>("DateOfCompletion")
+                    b.Property<DateTime?>("DateOfCompletion")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateOfOrder")
