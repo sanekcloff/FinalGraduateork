@@ -15,14 +15,14 @@ namespace SalesServices.ViewModels
         private List<Product> _products;
         private List<ProductCategory> _productCategories;
         private List<Service> _services;
-        private List<User> _user;
+        private List<User> _users;
         private List<UserProduct> _userProducts;
         private List<UserSvc> _userServices;
 
         public List<Product> Products { get => _products; set => Set(ref _products, value, nameof(Products)); }
         public List<ProductCategory> ProductCategories { get => _productCategories; set => Set(ref _productCategories, value, nameof(ProductCategories)); }
         public List<Service> Services { get => _services; set => Set(ref _services, value, nameof(Services)); }
-        public List<User> User { get => _user; set => Set(ref _user, value, nameof(User)); }
+        public List<User> Users { get => _users; set => Set(ref _users, value, nameof(Users)); }
         public List<UserProduct> UserProducts { get => _userProducts; set => Set(ref _userProducts, value, nameof(UserProducts)); }
         public List<UserSvc> UserServices { get => _userServices; set => Set(ref _userServices, value, nameof(UserServices)); }
         #endregion
@@ -116,6 +116,58 @@ namespace SalesServices.ViewModels
             "По дате добавления (возр.)"
         };
         #endregion
+
+        #region User properties & fields
+        private string _userSearch;
+        private string _selectedUserSort;
+        private string _selectedUserFilther;
+        private User _selectedUser;
+
+        public string UserSearch
+        {
+            get => _userSearch;
+            set
+            {
+                Set(ref _userSearch, value, nameof(UserSearch));
+                UpdateUsersList();
+            }
+        }
+        public string SelectedUserSort
+        {
+            get => _selectedUserSort;
+            set
+            {
+                Set(ref _selectedUserSort, value, nameof(SelectedUserSort));
+                UpdateUsersList();
+            }
+        }
+        public string SelectedUserFilther
+        {
+            get => _selectedUserFilther;
+            set
+            {
+                Set(ref _selectedUserFilther, value, nameof(SelectedUserFilther));
+                UpdateUsersList();
+            }
+        }
+        public User SelectedUser { get => _selectedUser; set => Set(ref _selectedUser, value, nameof(SelectedUser)); }
+        public List<string> UserFilthers { get; } = new List<string>()
+        {
+            "Все роли"
+        };
+        public List<string> UserSortings { get; } = new List<string>()
+        {
+            "Без сортировки",
+            "По ФИО (убыв.)",
+            "По ФИО (возр.)",
+            "По количеству товаров (убыв.)",
+            "По количеству товаров (возр.)",
+            "По количеству услуг (убыв.)",
+            "По количеству услуг (возр.)",
+            "По дате регистрации (убыв.)",
+            "По дате регистрации (возр.)"
+        };
+        #endregion
         public AdminViewModel(ApplicationDbContext ctx)
         {
             ProductService = new(ctx);
@@ -124,11 +176,15 @@ namespace SalesServices.ViewModels
 
             UpdateProductsList();
             UpdateServicesList();
+            UpdateUsersList();
             ProductFilthers.AddRange(ctx.ProductCategories.Select(category => category.Title));
+            UserFilthers.AddRange(ctx.Roles.Select(role => role.Title));
             
             SelectedProductFilther = ProductFilthers[0];
             SelectedProductSort = ProductSortings[0];
             SelectedServiceSort = ServiceSortings[0];
+            SelectedUserSort= UserSortings[0];
+            SelectedUserFilther = UserFilthers[0];
         }
 
         #region Product Methods
@@ -201,6 +257,52 @@ namespace SalesServices.ViewModels
                 return services.OrderBy(s => s.DateOfAdd).ToList();
             else
                 return services;
+        }
+        #endregion
+
+        #region User Methods
+        public void UpdateUsersList()
+        {
+            Users = SortUser(SearchUser(FiltherUser(UserService.GetUsers()))).ToList();
+        }
+        public ICollection<User> SearchUser(ICollection<User> users)
+        {
+            if (UserSearch == string.Empty || UserSearch == null)
+                return users;
+            else
+                return users
+                    .Where(u=>u.UserProfile.FullName.ToLower().Contains(UserSearch.ToLower()))
+                    .ToList();
+        }
+        public ICollection<User> FiltherUser(ICollection<User> users)
+        {
+            if (SelectedUserFilther == UserFilthers[0])
+                return users;
+            else
+                return users
+                    .Where(u => u.Role.Title == SelectedUserFilther)
+                    .ToList();
+        }
+        public ICollection<User> SortUser(ICollection<User> users)
+        {
+            if (SelectedUserSort == UserSortings[1])
+                return users.OrderByDescending(u => u.UserProfile.FullName).ToList();
+            else if (SelectedUserSort == UserSortings[2])
+                return users.OrderBy(u => u.UserProfile.FullName).ToList();
+            else if (SelectedUserSort == UserSortings[3])
+                return users.OrderByDescending(u => u.UserProfile.NumberOfPurchases).ToList();
+            else if (SelectedUserSort == UserSortings[4])
+                return users.OrderBy(u => u.UserProfile.NumberOfPurchases).ToList();
+            else if (SelectedUserSort == UserSortings[5])
+                return users.OrderByDescending(u => u.UserProfile.NumberOfServices).ToList();
+            else if (SelectedUserSort == UserSortings[6])
+                return users.OrderBy(u => u.UserProfile.NumberOfServices).ToList();
+            else if (SelectedUserSort == UserSortings[5])
+                return users.OrderByDescending(u => u.UserProfile.DateOfRegister).ToList();
+            else if (SelectedUserSort == UserSortings[6])
+                return users.OrderBy(u => u.UserProfile.DateOfRegister).ToList();
+            else
+                return users;
         }
         #endregion
     }

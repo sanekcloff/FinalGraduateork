@@ -115,7 +115,8 @@
                                                     Grid.Column="1"
                                                     Margin="10,0,0,0">
                                             <TextBlock Text="{Binding Title}"
-                                                       Foreground="{StaticResource TextColor}"/>
+                                                       Foreground="{StaticResource TextColor}"
+                                                       x:Name="TitleText"/>
                                             <TextBlock Text="{Binding Description}"
                                                        TextWrapping="Wrap"
                                                        Foreground="{StaticResource TextColor}"
@@ -140,14 +141,97 @@
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
                                         <Setter TargetName="Border" Property="Background" Value="{StaticResource ItemColorMouseOver}"/>
+                                        <Setter TargetName="TitleText" Property="FontSize" Value="16"/>
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="True">
                                         <Setter TargetName="Border" Property="Background" Value="{StaticResource ItemColorSelected}"/>
+                                        <Setter TargetName="TitleText" Property="FontSize" Value="16"/>
                                     </Trigger>
                                     <DataTrigger Binding="{Binding IsNegotiable}" Value="true">
                                         <Setter TargetName="FixedText" Property="Visibility" Value="Collapsed"/>
                                         <Setter TargetName="NegotiableText" Property="Visibility" Value="Visible"/>
                                     </DataTrigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="ListView" x:Key="UsersListView">
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <Border Margin="5"
+                                        Background="Transparent">
+                                    <Grid x:Name="Grid">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="8"/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="120"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Grid.Column="0"
+                                                Background="{StaticResource ItemColor}"
+                                                CornerRadius="4,0,0,4"
+                                                x:Name="Border"/>
+                                        <StackPanel Orientation="Vertical"
+                                                    Grid.Column="1"
+                                                    Margin="10,0,0,0">
+                                            <TextBlock Text="{Binding UserProfile.FullName}"
+                                                       Foreground="{StaticResource TextColor}"
+                                                       x:Name="FullNameText"/>
+                                            <TextBlock Text="{Binding UserProfile.DateOfBirth, StringFormat=Дата рождения:{0}}"
+                                                       Foreground="{StaticResource TextColor}"
+                                                       FontWeight="Light"/>
+                                            <TextBlock Text="{Binding UserProfile.Phone, StringFormat=Телефон:{0}}"
+                                                       Foreground="{StaticResource TextColor}"
+                                                       FontWeight="Light"/>
+                                            <TextBlock Text="{Binding UserProfile.Email, StringFormat=Email:{0}}"
+                                                       Foreground="{StaticResource TextColor}"
+                                                       FontWeight="Light"/>
+                                            <TextBlock Text="{Binding UserProfile.DateOfRegister, StringFormat=Дата регистрации:{0}}"
+                                                       Foreground="{StaticResource TextColor}"
+                                                       FontWeight="Light"/>
+                                            <TextBlock Text="{Binding UserProfile.NumberOfPurchases, StringFormat=Количество купленых товаров:{0}}"
+                                                       Foreground="{StaticResource TextColor}"
+                                                       FontWeight="Light"/>
+                                            <TextBlock Text="{Binding UserProfile.NumberOfServices, StringFormat=Количество заказаных услуг:{0}}"
+                                                       Foreground="{StaticResource TextColor}"
+                                                       FontWeight="Light"/>
+                                            <TextBlock Text="{Binding Login, StringFormat=Логин: {0}}"
+                                                       Foreground="{StaticResource TextColor}"
+                                                       FontWeight="Light"/>
+                                            <TextBlock Text="{Binding Password, StringFormat=Пароль: {0}}"
+                                                       Foreground="{StaticResource TextColor}"
+                                                       FontWeight="Light"/>
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="2"
+                                                   HorizontalAlignment="Right"
+                                                   VerticalAlignment="Top"
+                                                   Foreground="{StaticResource TextColor}"
+                                                   Text="{Binding Role.Title}"
+                                                   Margin="0,0,10,0"/>
+                                    </Grid>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="{StaticResource ItemColorMouseOver}"/>
+                                        <Setter TargetName="FullNameText" Property="FontSize" Value="16"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="{StaticResource ItemColorSelected}"/>
+                                        <Setter TargetName="FullNameText" Property="FontSize" Value="16"/>
+                                    </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>

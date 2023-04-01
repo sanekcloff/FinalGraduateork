@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SalesServices.Entities
 {
@@ -25,5 +26,8 @@ namespace SalesServices.Entities
         public ICollection<UserProduct> UserProducts { get; set; } = null!;
         public ICollection<UserSvc> UserServices { get; set; } = null!;
         public ICollection<FavoriteUserProduct> FavoriteUserProducts { get; set; } = null!;
+
+        [NotMapped]
+        public string FullData { get => $"Логин: {Login}; Пароль: {Password};"; }
     }
 }
