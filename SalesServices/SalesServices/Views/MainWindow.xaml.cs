@@ -26,9 +26,9 @@ namespace SalesServices.Views
         {
             InitializeComponent();
             Title=$"{user.Role.Title}: {user.UserProfile.FullName}";
-            if (user.Role.ID == 1) MainFrame.Navigate(new AdminWindow(ctx));
-            else if (user.Role.ID==2) MainFrame.Navigate(new EmployeeWindow(ctx));
-            else MainFrame.Navigate(new UserWindow(ctx));
+            if (user.Role.ID == 1) MainFrame.Navigate(new AdminPage(ctx));
+            else if (user.Role.ID==2) MainFrame.Navigate(new EmployeePage(ctx));
+            else MainFrame.Navigate(new ClientPage(ctx));
         }
     }
 }

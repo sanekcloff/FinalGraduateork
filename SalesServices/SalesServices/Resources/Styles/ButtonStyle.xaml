@@ -6,6 +6,19 @@
     <SolidColorBrush x:Key="ButtonColorPressed" Color="#FFC56C19"/>
     <SolidColorBrush x:Key="ButtonForegroundColor" Color="White"/>
 
+    <ImageBrush x:Key="AddButtonPicture"
+                ImageSource="\Resources\Icons\Buttons\AddButton.png"
+                Stretch="Uniform"/>
+    <ImageBrush x:Key="EditButtonPicture" 
+                ImageSource="\Resources\Icons\Buttons\EditButton.png"
+                Stretch="Uniform"/>
+    <ImageBrush x:Key="DeleteButtonPicture" 
+                ImageSource="\Resources\Icons\Buttons\DeleteButton.png"
+                Stretch="Uniform"/>
+    <ImageBrush x:Key="CleanButtonPicture" 
+                ImageSource="\Resources\Icons\Buttons\CleanButton.png"
+                Stretch="Uniform"/>
+
     <Style x:Key="ButtonStyle1" TargetType="Button">
         <Setter Property="Foreground" Value="{StaticResource ButtonForegroundColor}"/>
         <Setter Property="Template">
@@ -32,6 +45,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
     <Style x:Key="ButtonStyle2" TargetType="Button">
         <Setter Property="Foreground" Value="{StaticResource ButtonForegroundColor}"/>
         <Setter Property="FontWeight" Value="Light"/>
@@ -50,4 +64,108 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="AddButtonStyle" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{StaticResource AddButtonPicture}"
+                            Height="30"
+                            Width="30"
+                            Margin="5,2"
+                            Opacity="0.5"
+                            x:Name="Border"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Opacity" Value="1"/>
+                            <Setter TargetName="Border" Property="Height" Value="35"/>
+                            <Setter TargetName="Border" Property="Width" Value="35"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Opacity" Value="1"/>
+                            <Setter TargetName="Border" Property="Height" Value="35"/>
+                            <Setter TargetName="Border" Property="Width" Value="35"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="EditButtonStyle" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{StaticResource EditButtonPicture}"
+                            Height="30"
+                            Width="30"
+                            Margin="5,2"
+                            Opacity="0.5"
+                            x:Name="Border"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Opacity" Value="1"/>
+                            <Setter TargetName="Border" Property="Height" Value="35"/>
+                            <Setter TargetName="Border" Property="Width" Value="35"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Opacity" Value="1"/>
+                            <Setter TargetName="Border" Property="Height" Value="35"/>
+                            <Setter TargetName="Border" Property="Width" Value="35"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="DeleteButtonStyle" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{StaticResource DeleteButtonPicture}"
+                            Height="30"
+                            Width="30"
+                            Margin="5,2"
+                            Opacity="0.5"
+                            x:Name="Border"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Opacity" Value="1"/>
+                            <Setter TargetName="Border" Property="Height" Value="35"/>
+                            <Setter TargetName="Border" Property="Width" Value="35"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Opacity" Value="1"/>
+                            <Setter TargetName="Border" Property="Height" Value="35"/>
+                            <Setter TargetName="Border" Property="Width" Value="35"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="CleanButtonStyle" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{StaticResource CleanButtonPicture}"
+                            Height="30"
+                            Width="30"
+                            Margin="5,2"
+                            Opacity="0.5"
+                            x:Name="Border"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Opacity" Value="1"/>
+                            <Setter TargetName="Border" Property="Height" Value="35"/>
+                            <Setter TargetName="Border" Property="Width" Value="35"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Opacity" Value="1"/>
+                            <Setter TargetName="Border" Property="Height" Value="35"/>
+                            <Setter TargetName="Border" Property="Width" Value="35"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

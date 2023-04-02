@@ -1,4 +1,4 @@
-﻿<Page x:Class="SalesServices.Views.AdminWindow"
+﻿<Page x:Class="SalesServices.Views.AdminPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -16,6 +16,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition/>
+                        <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
@@ -42,7 +43,25 @@
                     <ListView ItemsSource="{Binding Products}"
                               SelectedItem="{Binding SelectedProduct}"
                               Grid.Row="1"
+                              x:Name="ProductsListView"
                               Style="{StaticResource ProductsListView}"/>
+                    <StackPanel Grid.Row="2"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                        <Button x:Name="AddProductButton"
+                                Style="{StaticResource AddButtonStyle}"
+                                Click="AddProductButton_Click"/>
+                        <Button x:Name="EditProductButton"
+                                Style="{StaticResource EditButtonStyle}"
+                                Click="EditProductButton_Click"/>
+                        <Button x:Name="DeleteProductButton"
+                                Style="{StaticResource DeleteButtonStyle}"
+                                Click="DeleteProductButton_Click"/>
+                        <Button x:Name="CleanProductButton"
+                                Style="{StaticResource CleanButtonStyle}"
+                                Click="CleanProductButton_Click"/>
+                    </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="Услуги">
@@ -50,6 +69,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition/>
+                        <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
@@ -72,7 +92,25 @@
                     <ListView ItemsSource="{Binding Services}"
                               SelectedItem="{Binding SelectedService}"
                               Grid.Row="1"
+                              x:Name="ServicesListView"
                               Style="{StaticResource ServicesListView}"/>
+                    <StackPanel Grid.Row="2"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                        <Button x:Name="AddServiceButton"
+                                Style="{StaticResource AddButtonStyle}"
+                                Click="AddServiceButton_Click"/>
+                        <Button x:Name="EditServiceButton"
+                                Style="{StaticResource EditButtonStyle}"
+                                Click="EditServiceButton_Click"/>
+                        <Button x:Name="DeleteServiceButton"
+                                Style="{StaticResource DeleteButtonStyle}"
+                                Click="DeleteServiceButton_Click"/>
+                        <Button x:Name="CleanServiceButton"
+                                Style="{StaticResource CleanButtonStyle}"
+                                Click="CleanServiceButton_Click"/>
+                    </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="Пользователи">
@@ -80,6 +118,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition/>
+                        <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
@@ -106,7 +145,25 @@
                     <ListView ItemsSource="{Binding Users}"
                               SelectedItem="{Binding SelectedUser}"
                               Grid.Row="1"
+                              x:Name="UsersListView"
                               Style="{StaticResource UsersListView}"/>
+                    <StackPanel Grid.Row="2"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                        <Button x:Name="AddUserButton"
+                                Style="{StaticResource AddButtonStyle}"
+                                Click="AddUserButton_Click"/>
+                        <Button x:Name="EditUserButton"
+                                Style="{StaticResource EditButtonStyle}"
+                                Click="EditUserButton_Click"/>
+                        <Button x:Name="DeleteUserButton"
+                                Style="{StaticResource DeleteButtonStyle}"
+                                Click="DeleteUserButton_Click"/>
+                        <Button x:Name="CleanUserButton"
+                                Style="{StaticResource CleanButtonStyle}"
+                                Click="CleanUserButton_Click"/>
+                    </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="Товары пользователей">
@@ -114,6 +171,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition/>
+                        <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
@@ -140,7 +198,25 @@
                     <ListView ItemsSource="{Binding UserProducts}"
                               SelectedItem="{Binding SelectedUserProduct}"
                               Grid.Row="1"
+                              x:Name="UserProductsListView"
                               Style="{StaticResource UserProductsListView}"/>
+                    <StackPanel Grid.Row="2"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                        <Button x:Name="AddUserProductButton"
+                                Style="{StaticResource AddButtonStyle}"
+                                Click="AddUserProductButton_Click"/>
+                        <Button x:Name="EditUserProductButton"
+                                Style="{StaticResource EditButtonStyle}"
+                                Click="EditUserProductButton_Click"/>
+                        <Button x:Name="DeleteUserProductButton"
+                                Style="{StaticResource DeleteButtonStyle}"
+                                Click="DeleteUserProductButton_Click"/>
+                        <Button x:Name="CleanUserProductButton"
+                                Style="{StaticResource CleanButtonStyle}"
+                                Click="CleanUserProductButton_Click"/>
+                    </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="Услуги пользователей">
@@ -148,6 +224,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition/>
+                        <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
@@ -174,7 +251,26 @@
                     <ListView ItemsSource="{Binding UserServices}"
                               SelectedItem="{Binding SelectedUserService}"
                               Grid.Row="1"
-                              Style="{StaticResource UserServicesListView}"/>
+                              x:Name="UserServicesListView"
+                              Style="{StaticResource UserServicesListView}">
+                    </ListView>
+                    <StackPanel Grid.Row="2"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                        <Button x:Name="AddUserServiceButton"
+                                Style="{StaticResource AddButtonStyle}"
+                                Click="AddUserServiceButton_Click"/>
+                        <Button x:Name="EditUserServiceButton"
+                                Style="{StaticResource EditButtonStyle}"
+                                Click="EditUserServiceButton_Click"/>
+                        <Button x:Name="DeleteUserServiceButton"
+                                Style="{StaticResource DeleteButtonStyle}"
+                                Click="DeleteUserServiceButton_Click"/>
+                        <Button x:Name="CleanUserServiceButton"
+                                Style="{StaticResource CleanButtonStyle}"
+                                Click="CleanUserServiceButton_Click"/>
+                    </StackPanel>
                 </Grid>
             </TabItem>
         </TabControl>

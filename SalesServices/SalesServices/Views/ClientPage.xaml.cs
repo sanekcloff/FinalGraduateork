@@ -1,5 +1,4 @@
 ﻿using SalesServices.Data;
-using SalesServices.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,16 +17,13 @@ using System.Windows.Shapes;
 namespace SalesServices.Views
 {
     /// <summary>
-    /// Логика взаимодействия для AdminWindow.xaml
+    /// Логика взаимодействия для ClientPage.xaml
     /// </summary>
-    public partial class AdminWindow : Page
+    public partial class ClientPage : Page
     {
-        private AdminViewModel _viewModel;
-        public AdminWindow(ApplicationDbContext ctx)
+        public ClientPage(ApplicationDbContext ctx)
         {
             InitializeComponent();
-            _viewModel = new AdminViewModel(ctx);
-            DataContext = _viewModel;
         }
     }
 }

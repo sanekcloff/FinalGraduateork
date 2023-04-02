@@ -1,4 +1,6 @@
-﻿using SalesServices.Data;
+﻿using SalesServices.Entities;
+using SalesServices.Services;
+using SalesServices.ViewModels.EntitiesViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,16 +16,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SalesServices.Views
+namespace SalesServices.Views.EntitiesPages
 {
     /// <summary>
-    /// Логика взаимодействия для EmployeeWindow.xaml
+    /// Логика взаимодействия для UserPage.xaml
     /// </summary>
-    public partial class EmployeeWindow : Page
+    public partial class UserPage : Page
     {
-        public EmployeeWindow(ApplicationDbContext ctx)
+        private UserPageViewModel _viewModel;
+        public UserPage(User user, UserService entityService)
         {
             InitializeComponent();
+            _viewModel = new(user, entityService);
+            DataContext = _viewModel;
         }
     }
 }

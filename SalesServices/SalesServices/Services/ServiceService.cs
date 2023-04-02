@@ -21,5 +21,27 @@ namespace SalesServices.Services
         {
             return _ctx.Services.ToList();
         }
+
+        public Service GetService(Service service)
+        {
+            return _ctx.Services.SingleOrDefault(s=>s.Equals(service));
+        }
+
+        public void Insert(Service service)
+        {
+            _ctx.Services.Add(service);
+            _ctx.SaveChanges();
+        }
+
+        public void Update(Service service)
+        {
+            _ctx.Services.Update(service);
+            _ctx.SaveChanges();
+        }
+        public void Delete(Service service)
+        {
+            _ctx.Services.Remove(service);
+            _ctx.SaveChanges();
+        }
     }
 }

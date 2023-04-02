@@ -1,6 +1,7 @@
 ﻿using SalesServices.Data;
 using SalesServices.Entities;
 using SalesServices.Services;
+using SalesServices.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,8 +32,8 @@ namespace SalesServices.ViewModels
         public ProductService ProductService { get; }
         public UserService UserService { get; }
         public ServiceService ServiceService { get; }
-        public UserProductsService UserProductsService { get; }
-        public UserServicesService UserServicesService { get; }
+        public UserProductService UserProductsService { get; }
+        public UserServiceService UserServicesService { get; }
         #endregion
 
         #region Product properties & fields
@@ -340,6 +341,14 @@ namespace SalesServices.ViewModels
             else
                 return products;
         }
+
+        public void CleanProduct()
+        {
+            SelectedProduct = null!;
+            SelectedProductFilther = ProductFilthers[0];
+            SelectedProductSort = ProductSortings[0];
+            ProductSearch = null!;
+        }
         #endregion
 
         #region Service Methods
@@ -369,6 +378,13 @@ namespace SalesServices.ViewModels
                 return services.OrderBy(s => s.DateOfAdd).ToList();
             else
                 return services;
+        }
+
+        public void CleanService()
+        {
+            SelectedService = null!;
+            SelectedServiceSort = ServiceSortings[0];
+            ServiceSearch = null!;
         }
         #endregion
 
@@ -416,6 +432,14 @@ namespace SalesServices.ViewModels
             else
                 return users;
         }
+
+        public void CleanUser()
+        {
+            SelectedUser = null!;
+            SelectedUserSort = UserSortings[0];
+            SelectedUserFilther = UserFilthers[0];
+            UserSearch = null!;
+        }
         #endregion
 
         #region UserProducts Methods
@@ -459,6 +483,13 @@ namespace SalesServices.ViewModels
             else
                 return userProducts;
         }
+        public void CleanUserProduct()
+        {
+            SelectedUserProduct = null!;
+            SelectedUserProductFilther = UserProductFilthers[0];
+            SelectedUserProductSort = UserProductSortings[0];
+            UserProductSearch = null!;
+        }
         #endregion
 
         #region UserProducts Methods
@@ -498,6 +529,27 @@ namespace SalesServices.ViewModels
             else
                 return userServices;
         }
+        public void CleanUserService()
+        {
+            SelectedUserService = null!;
+            SelectedUserServiceFilther = UserServiceFilthers[0];
+            SelectedUserServiceSort = UserServiceSortings[0];
+            UserServiceSearch = null!;
+        }
         #endregion
+
+        public void OpenManagerWindow(object? obj)
+        {
+            if (obj is Product)
+                new ManagerWindow(obj as Product, ProductService).ShowDialog();
+            else if (obj is Service)
+                new ManagerWindow(obj as Service, ServiceService).ShowDialog();
+            else if (obj is User)
+                new ManagerWindow(obj as User, UserService).ShowDialog();
+            else if (obj is UserProduct)
+                new ManagerWindow(obj as UserProduct, UserProductsService).ShowDialog();
+            else if (obj is UserSvc)
+                new ManagerWindow(obj as UserSvc, UserServicesService).ShowDialog();
+        }
     }
 }

@@ -17,11 +17,11 @@ using System.Windows.Shapes;
 namespace SalesServices.Views
 {
     /// <summary>
-    /// Логика взаимодействия для UserWindow.xaml
+    /// Логика взаимодействия для EmployeeWindow.xaml
     /// </summary>
-    public partial class UserWindow : Page
+    public partial class EmployeePage : Page
     {
-        public UserWindow(ApplicationDbContext ctx)
+        public EmployeePage(ApplicationDbContext ctx)
         {
             InitializeComponent();
         }

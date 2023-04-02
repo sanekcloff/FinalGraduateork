@@ -21,5 +21,25 @@ namespace SalesServices.Services
         {
             return _ctx.Products.Include(p=>p.ProductCategory).ToList();
         }
+        public Product GetProduct(Product product)
+        {
+            return _ctx.Products.Include(p=>p.ProductCategory).SingleOrDefault(p=>p.Equals(product));
+        }
+
+        public void Insert(Product product) 
+        { 
+            _ctx.Products.Remove(product);
+            _ctx.SaveChanges();
+        }
+        public void Update(Product product)
+        {
+            _ctx.Products.Update(product);
+            _ctx.SaveChanges();
+        }
+        public void Delete(Product product)
+        {
+            _ctx.Products.Remove(product);
+            _ctx.SaveChanges();
+        }
     }
 }

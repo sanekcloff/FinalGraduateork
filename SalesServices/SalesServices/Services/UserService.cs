@@ -22,9 +22,9 @@ namespace SalesServices.Services
         {
             return _ctx.Users.Include(u => u.UserProfile).Include(u=>u.Role).SingleOrDefault(u => u.Login == login && u.Password == password);
         }
-        public User GetUser(int id)
+        public User GetUser(User user)
         {
-            return _ctx.Users.Include(u => u.UserProfile).Include(u => u.Role).SingleOrDefault(u => u.ID == id);
+            return _ctx.Users.Include(u => u.UserProfile).Include(u => u.Role).SingleOrDefault(u => u.Equals(user));
         }
         public ICollection<User> GetUsers()
         {
@@ -34,6 +34,18 @@ namespace SalesServices.Services
         {
             _ctx.Users.Add(user);
             _ctx.UserProfiles.Add(userProfile);
+            _ctx.SaveChanges();
+        }
+        public void Update(User user, UserProfile userProfile)
+        {
+            _ctx.Users.Update(user);
+            _ctx.UserProfiles.Update(userProfile);
+            _ctx.SaveChanges();
+        }
+        public void Delete(User user, UserProfile userProfile)
+        {
+            _ctx.Users.Remove(user);
+            _ctx.UserProfiles.Remove(userProfile);
             _ctx.SaveChanges();
         }
     }
