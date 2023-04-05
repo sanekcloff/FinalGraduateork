@@ -39,7 +39,8 @@
                                         <StackPanel Orientation="Vertical"
                                                     Grid.Column="2">
                                             <TextBlock Text="{Binding FullName}"
-                                                       Foreground="{StaticResource TextColor}"/>
+                                                       Foreground="{StaticResource TextColor}"
+                                                       TextWrapping="Wrap"/>
                                             <TextBlock Text="{Binding Description}"
                                                        TextWrapping="Wrap"
                                                        Foreground="{StaticResource TextColor}"

@@ -6,8 +6,46 @@
       xmlns:local="clr-namespace:SalesServices.Views.EntitiesPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ServicePage">
-    <Grid>
-        <TextBlock Text="Service"/>
-    </Grid>
+      Title="ServicePage"
+      FontFamily="Cascadia Code"
+      FontSize="14"
+      Foreground="{StaticResource TextColor}">
+    <StackPanel Orientation="Vertical"
+                VerticalAlignment="Center"
+                Margin="40">
+        <Grid Height="100">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center"
+                        Grid.Column="0">
+                <TextBlock Text="Название:"
+                           Margin="5"/>
+                <TextBox Style="{StaticResource TextBoxStyle1}"
+                         Margin="5"
+                         Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center"
+                        Grid.Column="1">
+                <TextBlock Text="Цена за час (договорная при 0):"
+                           Margin="5"/>
+                <TextBox Style="{StaticResource TextBoxStyle1}"
+                         Margin="5"
+                         Text="{Binding CostPerHour, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+        </Grid>
+        <TextBlock Text="Описание:"
+                   Margin="5"/>
+        <TextBox Style="{StaticResource TextBoxStyle2}"
+                 Margin="5"
+                 Height="90"
+                 Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Margin="5,20,5,5"
+                Style="{StaticResource ButtonStyle1}"
+                Width="160"
+                Content="Добавить"
+                x:Name="ControlButton"
+                Click="ControlButton_Click"/>
+    </StackPanel>
 </Page>

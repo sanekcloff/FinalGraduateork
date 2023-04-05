@@ -59,9 +59,6 @@ namespace SalesServices.Migrations
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("CountInStock")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateOfAdd")
                         .HasColumnType("datetime2");
 

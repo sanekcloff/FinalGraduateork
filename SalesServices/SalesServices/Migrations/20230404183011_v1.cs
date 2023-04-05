@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SalesServices.Migrations
 {
     /// <inheritdoc />
-    public partial class v01 : Migration
+    public partial class v1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -76,7 +76,6 @@ namespace SalesServices.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Picture = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    CountInStock = table.Column<int>(type: "int", nullable: false),
                     Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     DateOfAdd = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ProductCategoryId = table.Column<int>(type: "int", nullable: false)

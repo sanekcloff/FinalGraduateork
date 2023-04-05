@@ -1,4 +1,5 @@
-﻿using SalesServices.Entities;
+﻿using Microsoft.Win32;
+using SalesServices.Entities;
 using SalesServices.Services;
 using SalesServices.ViewModels.EntitiesViewModels;
 using System;
@@ -29,6 +30,46 @@ namespace SalesServices.Views.EntitiesPages
             InitializeComponent();
             _viewModel = new ProductPageViewModel(product, entityService);
             DataContext= _viewModel;
+            if (!_viewModel.IsNew)
+                ControlButton.Content = "Изменить";
+        }
+
+        private void UploadPicturePath_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog();
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                _viewModel.GetPicturePath(openFileDialog.FileName);
+            }
+        }
+
+        private void ControlButton_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.GetProduct();
+            if ((_viewModel.Title == null || _viewModel.Title == string.Empty)
+                || (_viewModel.Description == null || _viewModel.Description == string.Empty)
+                || (_viewModel.Cost == 0)
+                || (_viewModel.SelectedProductCategory == null))
+                MessageBox.Show("Все поля должны быть заполнены!");
+            else
+            {
+                if (_viewModel.IsNew)
+                {
+                    if (_viewModel.Service.GetProduct(_viewModel.Product) == null)
+                    {
+                        _viewModel.Service.Insert(_viewModel.Product);
+                        MessageBox.Show($"Продукт {_viewModel.Title} успешно добавлен!");
+                    }
+                    else
+                        MessageBox.Show($"Такой продукт уже существует!");
+                }
+                else
+                {
+                    _viewModel.Service.Update(_viewModel.Product);
+                    MessageBox.Show($"Изменения успешно внесены!");
+                }
+            }  
         }
     }
 }

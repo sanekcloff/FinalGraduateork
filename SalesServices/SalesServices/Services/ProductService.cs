@@ -21,14 +21,17 @@ namespace SalesServices.Services
         {
             return _ctx.Products.Include(p=>p.ProductCategory).ToList();
         }
+        public ICollection<ProductCategory> GetProductCategories()
+        {
+            return _ctx.ProductCategories.ToList();
+        }
         public Product GetProduct(Product product)
         {
             return _ctx.Products.Include(p=>p.ProductCategory).SingleOrDefault(p=>p.Equals(product));
         }
-
         public void Insert(Product product) 
         { 
-            _ctx.Products.Remove(product);
+            _ctx.Products.Add(product);
             _ctx.SaveChanges();
         }
         public void Update(Product product)

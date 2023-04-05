@@ -29,6 +29,39 @@ namespace SalesServices.Views.EntitiesPages
             InitializeComponent();
             _viewModel = new(user, entityService);
             DataContext = _viewModel;
+            if (!_viewModel.IsNew)
+                ControlButton.Content = "Изменить";
+        }
+
+        private void ControlButton_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.GetUser();
+            if ((_viewModel.Login == null || _viewModel.Login == string.Empty)
+                || (_viewModel.Password == null || _viewModel.Password == string.Empty)
+                || (_viewModel.UserProfile.LastName == null || _viewModel.UserProfile.LastName == string.Empty)
+                || (_viewModel.UserProfile.FirstName == null || _viewModel.UserProfile.FirstName == string.Empty)
+                || (_viewModel.UserProfile.MiddleName == null || _viewModel.UserProfile.MiddleName == string.Empty)
+                || (_viewModel.UserProfile.Phone == null || _viewModel.UserProfile.Phone == string.Empty)
+                || (_viewModel.UserProfile.Email == null || _viewModel.UserProfile.Email == string.Empty))
+                MessageBox.Show("Все поля должны быть заполнены!");
+            else
+            {
+                if (_viewModel.IsNew)
+                {
+                    if (_viewModel.EntityService.GetUser(_viewModel.User)==null)
+                    {
+                        _viewModel.EntityService.Insert(_viewModel.User, _viewModel.UserProfile);
+                        MessageBox.Show($"Пользователь {_viewModel.UserProfile.FullName} успешно добавлен!");
+                    }
+                    else
+                        MessageBox.Show($"Такой пользователь уже существует!");
+                }
+                else
+                {
+                    _viewModel.EntityService.Update(_viewModel.User, _viewModel.UserProfile);
+                    MessageBox.Show($"Изменения успешно внесены!");
+                }
+            }
         }
     }
 }

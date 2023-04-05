@@ -17,7 +17,10 @@ namespace SalesServices.Services
         {
             _ctx = ctx;
         }
-
+        public ICollection<Role> GetRoles()
+        {
+            return _ctx.Roles.ToList();
+        }
         public User GetUser(string login, string password)
         {
             return _ctx.Users.Include(u => u.UserProfile).Include(u=>u.Role).SingleOrDefault(u => u.Login == login && u.Password == password);
@@ -48,5 +51,6 @@ namespace SalesServices.Services
             _ctx.UserProfiles.Remove(userProfile);
             _ctx.SaveChanges();
         }
+
     }
 }

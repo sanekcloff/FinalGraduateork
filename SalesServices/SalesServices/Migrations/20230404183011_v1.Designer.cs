@@ -12,8 +12,8 @@ using SalesServices.Data;
 namespace SalesServices.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230401160024_v0.1")]
-    partial class v01
+    [Migration("20230404183011_v1")]
+    partial class v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,9 +61,6 @@ namespace SalesServices.Migrations
 
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("CountInStock")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateOfAdd")
                         .HasColumnType("datetime2");

@@ -21,7 +21,6 @@ namespace SalesServices.Entities
         public string Description { get; set; } = null!;
         public string? Picture { get; set; } = null!;
         public decimal Cost { get; set; }
-        public int CountInStock { get; set; }
         public decimal Discount { get; set; }
         public DateTime DateOfAdd { get; set; }
 
@@ -39,6 +38,7 @@ namespace SalesServices.Entities
             get => (Picture == string.Empty || Picture == null) 
                 ? @"\Resources\Pictures\NonPicture.png" : @$"\Resources\Pictures\{Picture}";
         }
+        
         public bool IsDiscount { get => Discount==1 ? false : true; }
         public decimal CorrectCost { get => IsDiscount ? Cost*Discount : Cost; }
         public int CorrectDiscount { get => (int)((1-Discount)*100); }

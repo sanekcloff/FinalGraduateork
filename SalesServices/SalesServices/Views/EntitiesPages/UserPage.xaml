@@ -6,8 +6,101 @@
       xmlns:local="clr-namespace:SalesServices.Views.EntitiesPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="UserPage">
-    <Grid>
-        <TextBlock Text="User"/>
-    </Grid>
+      Title="UserPage"
+      Foreground="{StaticResource TextColor}"
+      FontSize="14"
+      FontFamily="Cascadia Code">
+    <StackPanel Orientation="Vertical"
+                VerticalAlignment="Center">
+        <StackPanel HorizontalAlignment="Center"
+                    Orientation="Horizontal"
+                    Margin="10">
+            <StackPanel>
+                <TextBlock Text="Логин:"
+                   Margin="5"/>
+                <TextBox Style="{StaticResource TextBoxStyle1}"
+                         Margin="5"
+                         Width="200"
+                         Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Пароль:"
+                   Margin="5"/>
+                <TextBox Style="{StaticResource TextBoxStyle1}"
+                         Margin="5"
+                         Width="200"
+                         Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Роль:"
+                   Margin="5"/>
+                <ComboBox Margin="5"
+                          Width="200"
+                          SelectedItem="{Binding SelectedRole, UpdateSourceTrigger=PropertyChanged}"
+                          ItemsSource="{Binding Roles}"
+                          DisplayMemberPath="Title"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center"
+                    Orientation="Horizontal"
+                    Margin="10">
+            <StackPanel>
+                <TextBlock Text="Фамилия:"
+                   Margin="5"/>
+                <TextBox Style="{StaticResource TextBoxStyle1}"
+                         Margin="5"
+                         Width="200"
+                         Text="{Binding UserProfile.LastName, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Имя:"
+                   Margin="5"/>
+                <TextBox Style="{StaticResource TextBoxStyle1}"
+                         Margin="5"
+                         Width="200"
+                         Text="{Binding UserProfile.FirstName, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Отчество:"
+                   Margin="5"/>
+                <TextBox Style="{StaticResource TextBoxStyle1}"
+                         Margin="5"
+                         Width="200"
+                         Text="{Binding UserProfile.MiddleName, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center"
+                    Orientation="Horizontal"
+                    Margin="10">
+            <StackPanel>
+                <TextBlock Text="Дата рождения:"
+                   Margin="5"/>
+                <DatePicker Margin="5"
+                            Width="200"
+                            SelectedDate="{Binding UserProfile.DateOfBirth, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Телефон:"
+                   Margin="5"/>
+                <TextBox Style="{StaticResource TextBoxStyle1}"
+                         Margin="5"
+                         Width="200"
+                         Text="{Binding UserProfile.Phone, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Email:"
+                   Margin="5"/>
+                <TextBox Style="{StaticResource TextBoxStyle1}"
+                         Margin="5"
+                         Width="200"
+                         Text="{Binding UserProfile.Email, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+        </StackPanel>
+        <Button Style="{StaticResource ButtonStyle1}"
+                Width="200"
+                Margin="5,20,5,5"
+                Content="Добавить"
+                x:Name="ControlButton"
+                Click="ControlButton_Click"/>
+    </StackPanel>
 </Page>

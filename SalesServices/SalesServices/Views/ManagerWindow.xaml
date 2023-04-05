@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="ManagerWindow" Height="450" Width="800"
         Background="{StaticResource BackgroundDark}"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner">
     <Frame x:Name="ManagerFrame"/>
 </Window>
