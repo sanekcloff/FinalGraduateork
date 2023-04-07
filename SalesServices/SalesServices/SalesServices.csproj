@@ -9,10 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Icons\AddIcon.ico" />
     <None Remove="Resources\Icons\Buttons\AddButton.png" />
     <None Remove="Resources\Icons\Buttons\CleanButton.png" />
     <None Remove="Resources\Icons\Buttons\DeleteButton.png" />
     <None Remove="Resources\Icons\Buttons\EditButton.png" />
+    <None Remove="Resources\Icons\DeleteIcon.ico" />
+    <None Remove="Resources\Icons\EditIcon.ico" />
     <None Remove="Resources\Icons\Icon.ico" />
     <None Remove="Resources\Icons\Logo.png" />
     <None Remove="Resources\Pictures\NonPicture.png" />
@@ -45,6 +48,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Icons\AddIcon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Icons\Buttons\AddButton.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -57,8 +63,14 @@
     <Resource Include="Resources\Icons\Buttons\EditButton.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Icons\DeleteIcon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Icons\EditIcon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Icons\Icon.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Icons\Logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

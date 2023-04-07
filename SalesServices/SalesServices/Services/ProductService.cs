@@ -21,10 +21,6 @@ namespace SalesServices.Services
         {
             return _ctx.Products.Include(p=>p.ProductCategory).ToList();
         }
-        public ICollection<ProductCategory> GetProductCategories()
-        {
-            return _ctx.ProductCategories.ToList();
-        }
         public Product GetProduct(Product product)
         {
             return _ctx.Products.Include(p=>p.ProductCategory).SingleOrDefault(p=>p.Equals(product));

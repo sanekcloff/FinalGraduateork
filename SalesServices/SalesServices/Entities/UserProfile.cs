@@ -18,8 +18,6 @@ namespace SalesServices.Entities
         public string Phone { get; set; } = null!;
         public string Email { get; set; } = null!;
         public DateTime DateOfRegister { get; set; }
-        public int NumberOfPurchases { get; set; }
-        public int NumberOfServices { get; set; }
 
         public int UserId { get; set; }
 
@@ -27,5 +25,7 @@ namespace SalesServices.Entities
 
         [NotMapped]
         public string FullName { get => $"{LastName} {FirstName} {MiddleName}"; }
+        public int NumberOfPurchases { get => User.UserProducts.Count; }
+        public int NumberOfServices { get => User.UserServices.Count; }
     }
 }

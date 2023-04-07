@@ -56,8 +56,6 @@ namespace SalesServices.ViewModels
                 Phone = Phone,
                 DateOfBirth = DateOfBirth,
                 DateOfRegister = DateTime.Now,
-                NumberOfPurchases=0,
-                NumberOfServices=0,
                 User=user
             };
 

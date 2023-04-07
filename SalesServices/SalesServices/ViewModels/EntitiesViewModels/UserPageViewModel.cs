@@ -26,18 +26,16 @@ namespace SalesServices.ViewModels.EntitiesViewModels
         public Role SelectedRole { get => _selectedRole; set => Set(ref _selectedRole, value, nameof(SelectedRole)); }
         public UserProfile UserProfile { get => _userProfile; set => Set(ref _userProfile, value, nameof(UserProfile)); }
         public List<Role> Roles { get; }
-        public UserPageViewModel(User user, UserService entityService)
+        public UserPageViewModel(User user, UserService entityService, RoleService roleService)
         {
-            Roles = new List<Role>(entityService.GetRoles());
+            Roles = new List<Role>(roleService.GetRoles());
             if (entityService.GetUser(user)==null)
             {
                 IsNew = true;
                 UserProfile = new()
                 {
                     DateOfRegister = DateTime.Now,
-                    DateOfBirth=DateTime.Now,
-                    NumberOfPurchases=0,
-                    NumberOfServices=0
+                    DateOfBirth=DateTime.Now
                 };
                 SelectedRole = Roles[Roles.Count - 1];
             }

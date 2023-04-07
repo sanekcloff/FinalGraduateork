@@ -191,7 +191,7 @@
                                             <TextBlock Text="{Binding UserProfile.FullName}"
                                                        Foreground="{StaticResource TextColor}"
                                                        x:Name="FullNameText"/>
-                                            <TextBlock Text="{Binding UserProfile.DateOfBirth, StringFormat=Дата рождения:{0}}"
+                                            <TextBlock Text="{Binding UserProfile.DateOfBirth, StringFormat=Дата рождения:{0:d},ConverterCulture=ru-RU}"
                                                        Foreground="{StaticResource TextColor}"
                                                        FontWeight="Light"/>
                                             <TextBlock Text="{Binding UserProfile.Phone, StringFormat=Телефон:{0}}"
@@ -200,7 +200,7 @@
                                             <TextBlock Text="{Binding UserProfile.Email, StringFormat=Email:{0}}"
                                                        Foreground="{StaticResource TextColor}"
                                                        FontWeight="Light"/>
-                                            <TextBlock Text="{Binding UserProfile.DateOfRegister, StringFormat=Дата регистрации:{0}}"
+                                            <TextBlock Text="{Binding UserProfile.DateOfRegister,StringFormat=Дата регистрации:{0:d}, ConverterCulture=ru-RU}"
                                                        Foreground="{StaticResource TextColor}"
                                                        FontWeight="Light"/>
                                             <TextBlock Text="{Binding UserProfile.NumberOfPurchases, StringFormat=Количество купленых товаров:{0}}"
@@ -284,10 +284,20 @@
                                                            Foreground="{StaticResource TextColor}"
                                                            FontSize="12"
                                                            FontWeight="Light"/>
+                                                <TextBlock Text="{Binding DateOfOrder,StringFormat=Дата заказа: {0:d}, ConverterCulture=ru-RU}"
+                                                           Foreground="{StaticResource TextColor}"
+                                                           FontSize="12"
+                                                           FontWeight="Light"/>
                                                 <TextBlock Text="{Binding Status.Title,StringFormat=Статус: {0}}"
                                                            Foreground="{StaticResource TextColor}"
                                                            FontSize="12"
                                                            FontWeight="Light"/>
+                                                <TextBlock Text="{Binding DateOfCompletion,StringFormat=Дата зваершения: {0:d}, ConverterCulture=ru-RU}"
+                                                           Foreground="{StaticResource TextColor}"
+                                                           FontSize="12"
+                                                           FontWeight="Light"
+                                                           x:Name="DateOfCompletioText"
+                                                           Visibility="Collapsed"/>
                                             </StackPanel>
                                         </StackPanel>
                                         <TextBlock Grid.Column="2"
@@ -307,6 +317,9 @@
                                         <Setter TargetName="Border" Property="Background" Value="{StaticResource ItemColorSelected}"/>
                                         <Setter TargetName="Image" Property="Width" Value="120"/>
                                     </Trigger>
+                                    <DataTrigger Binding="{Binding StatusId}" Value="3">
+                                        <Setter TargetName="DateOfCompletioText" Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>
@@ -349,10 +362,20 @@
                                                            x:Name="FullNameText"/>
                                                 <TextBlock Text="{Binding Service.Title,StringFormat=Услуга: {0}}"
                                                            Foreground="{StaticResource TextColor}"/>
+                                                <TextBlock Text="{Binding DateOfOrder,StringFormat=Дата заказа: {0:d},ConverterCulture=ru-RU}"
+                                                           Foreground="{StaticResource TextColor}"
+                                                           FontSize="12"
+                                                           FontWeight="Light"/>
                                                 <TextBlock Text="{Binding Status.Title,StringFormat=Статус: {0}}"
                                                            Foreground="{StaticResource TextColor}"
                                                            FontSize="12"
                                                            FontWeight="Light"/>
+                                                <TextBlock Text="{Binding DateOfCompletion,StringFormat=Дата зваершения: {0:d},ConverterCulture=ru-RU}"
+                                                           Foreground="{StaticResource TextColor}"
+                                                           FontSize="12"
+                                                           FontWeight="Light"
+                                                           x:Name="DateOfCompletioText"
+                                                           Visibility="Collapsed"/>
                                             </StackPanel>
                                         </StackPanel>
                                         <StackPanel Grid.Column="2"
@@ -381,6 +404,9 @@
                                     <DataTrigger Binding="{Binding Service.IsNegotiable}" Value="true">
                                         <Setter TargetName="CostText" Property="Visibility" Value="Collapsed"/>
                                         <Setter TargetName="NegotiableText" Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding StatusId}" Value="3">
+                                        <Setter TargetName="DateOfCompletioText" Property="Visibility" Value="Visible"/>
                                     </DataTrigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>

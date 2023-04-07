@@ -25,10 +25,10 @@ namespace SalesServices.Views.EntitiesPages
     public partial class ProductPage : Page
     {
         private ProductPageViewModel _viewModel;
-        public ProductPage(Product product, ProductService entityService)
+        public ProductPage(Product product, ProductService entityService, ProductCategoryService productCategoryService)
         {
             InitializeComponent();
-            _viewModel = new ProductPageViewModel(product, entityService);
+            _viewModel = new ProductPageViewModel(product, entityService, productCategoryService);
             DataContext= _viewModel;
             if (!_viewModel.IsNew)
                 ControlButton.Content = "Изменить";
@@ -56,9 +56,9 @@ namespace SalesServices.Views.EntitiesPages
             {
                 if (_viewModel.IsNew)
                 {
-                    if (_viewModel.Service.GetProduct(_viewModel.Product) == null)
+                    if (_viewModel.EntityService.GetProduct(_viewModel.Product) == null)
                     {
-                        _viewModel.Service.Insert(_viewModel.Product);
+                        _viewModel.EntityService.Insert(_viewModel.Product);
                         MessageBox.Show($"Продукт {_viewModel.Title} успешно добавлен!");
                     }
                     else
@@ -66,7 +66,7 @@ namespace SalesServices.Views.EntitiesPages
                 }
                 else
                 {
-                    _viewModel.Service.Update(_viewModel.Product);
+                    _viewModel.EntityService.Update(_viewModel.Product);
                     MessageBox.Show($"Изменения успешно внесены!");
                 }
             }  

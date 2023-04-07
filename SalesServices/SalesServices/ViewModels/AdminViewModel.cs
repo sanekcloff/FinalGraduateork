@@ -34,6 +34,9 @@ namespace SalesServices.ViewModels
         public ServiceService ServiceService { get; }
         public UserProductService UserProductsService { get; }
         public UserServiceService UserServicesService { get; }
+        public ProductCategoryService ProductCategoryService { get; }
+        public RoleService RoleService { get; }
+        public StatusService StatusService { get; }
         #endregion
 
         #region Product properties & fields
@@ -277,6 +280,9 @@ namespace SalesServices.ViewModels
             ServiceService = new(ctx);
             UserProductsService = new(ctx);
             UserServicesService = new(ctx);
+            ProductCategoryService=new(ctx);
+            RoleService = new(ctx);
+            StatusService = new(ctx);
 
             UpdateProductsList();
             UpdateServicesList();
@@ -468,17 +474,17 @@ namespace SalesServices.ViewModels
         }
         public ICollection<UserProduct> SortUserProduct(ICollection<UserProduct> userProducts)
         {
-            if (SelectedUserSort == UserSortings[1])
+            if (SelectedUserProductSort == UserProductSortings[1])
                 return userProducts.OrderByDescending(up => up.Quantity).ToList();
-            else if (SelectedUserSort == UserSortings[2])
+            else if (SelectedUserProductSort == UserProductSortings[2])
                 return userProducts.OrderBy(up => up.Quantity).ToList();
-            else if (SelectedUserSort == UserSortings[3])
+            else if (SelectedUserProductSort == UserProductSortings[3])
                 return userProducts.OrderByDescending(up => up.DateOfOrder).ToList();
-            else if (SelectedUserSort == UserSortings[4])
+            else if (SelectedUserProductSort == UserProductSortings[4])
                 return userProducts.OrderBy(up => up.DateOfOrder).ToList();
-            else if (SelectedUserSort == UserSortings[5])
+            else if (SelectedUserProductSort == UserProductSortings[5])
                 return userProducts.OrderByDescending(up => up.FullCost).ToList();
-            else if (SelectedUserSort == UserSortings[6])
+            else if (SelectedUserProductSort == UserProductSortings[6])
                 return userProducts.OrderBy(up => up.FullCost).ToList();
             else
                 return userProducts;
@@ -518,13 +524,13 @@ namespace SalesServices.ViewModels
         }
         public ICollection<UserSvc> SortUserService(ICollection<UserSvc> userServices)
         {
-            if (SelectedUserSort == UserSortings[3])
+            if (SelectedUserServiceSort == UserServiceSortings[1])
                 return userServices.OrderByDescending(us => us.DateOfOrder).ToList();
-            else if (SelectedUserSort == UserSortings[4])
+            else if (SelectedUserServiceSort == UserServiceSortings[2])
                 return userServices.OrderBy(us => us.DateOfOrder).ToList();
-            else if (SelectedUserSort == UserSortings[5])
+            else if (SelectedUserServiceSort == UserServiceSortings[3])
                 return userServices.OrderByDescending(us => us.Service.CostPerHour).ToList();
-            else if (SelectedUserSort == UserSortings[6])
+            else if (SelectedUserServiceSort == UserServiceSortings[4])
                 return userServices.OrderBy(us => us.Service.CostPerHour).ToList();
             else
                 return userServices;
@@ -541,15 +547,15 @@ namespace SalesServices.ViewModels
         public void OpenManagerWindow(object? obj)
         {
             if (obj is Product)
-                new ManagerWindow(obj as Product, ProductService).ShowDialog();
+                new ManagerWindow(obj as Product, ProductService,ProductCategoryService).ShowDialog();
             else if (obj is Service)
                 new ManagerWindow(obj as Service, ServiceService).ShowDialog();
             else if (obj is User)
-                new ManagerWindow(obj as User, UserService).ShowDialog();
+                new ManagerWindow(obj as User, UserService, RoleService).ShowDialog();
             else if (obj is UserProduct)
-                new ManagerWindow(obj as UserProduct, UserProductsService).ShowDialog();
+                new ManagerWindow(obj as UserProduct, UserProductsService, ProductService, UserService, StatusService).ShowDialog();
             else if (obj is UserSvc)
-                new ManagerWindow(obj as UserSvc, UserServicesService).ShowDialog();
+                new ManagerWindow(obj as UserSvc, UserServicesService, ServiceService, UserService, StatusService).ShowDialog();
         }
     }
 }

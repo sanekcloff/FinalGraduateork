@@ -24,10 +24,10 @@ namespace SalesServices.Views.EntitiesPages
     public partial class UserPage : Page
     {
         private UserPageViewModel _viewModel;
-        public UserPage(User user, UserService entityService)
+        public UserPage(User user, UserService entityService, RoleService roleService)
         {
             InitializeComponent();
-            _viewModel = new(user, entityService);
+            _viewModel = new(user, entityService, roleService);
             DataContext = _viewModel;
             if (!_viewModel.IsNew)
                 ControlButton.Content = "Изменить";

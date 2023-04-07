@@ -12,7 +12,7 @@ namespace SalesServices.ViewModels.EntitiesViewModels
     public class ProductPageViewModel:ViewModelBase
     {
         public bool IsNew=false;
-        public ProductService Service { get; }
+        public ProductService EntityService { get; }
 
         private Product _product;
 
@@ -94,7 +94,7 @@ namespace SalesServices.ViewModels.EntitiesViewModels
         public List<ProductCategory> ProductCategories { get; }
         
 
-        public ProductPageViewModel(Product product, ProductService entityService)
+        public ProductPageViewModel(Product product, ProductService entityService, ProductCategoryService productCategoryService)
         {
             if (entityService.GetProduct(product)==null)
             {
@@ -109,8 +109,8 @@ namespace SalesServices.ViewModels.EntitiesViewModels
                 SelectedProductCategory = product.ProductCategory;
             }
             Discount = product.Discount;
-            Service = entityService;
-            ProductCategories = new(Service.GetProductCategories());
+            EntityService = entityService;
+            ProductCategories = new(productCategoryService.GetProductCategories());
             Product = product;
         }
         public void GetPicturePath(string path)

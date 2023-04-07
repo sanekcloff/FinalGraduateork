@@ -6,8 +6,34 @@
       xmlns:local="clr-namespace:SalesServices.Views.EntitiesPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="UserServicePage">
-    <Grid>
-        <TextBlock Text="UserService"/>
-    </Grid>
+      Title="UserServicePage"
+      Foreground="{StaticResource TextColor}"
+      FontSize="14"
+      FontFamily="Cascadia Code">
+    <StackPanel VerticalAlignment="Center">
+        <TextBlock Text="Услуга:"
+                   Margin="5"/>
+        <ComboBox Margin="5"
+                  SelectedItem="{Binding SelectedService, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Services}"
+                  DisplayMemberPath="Title"/>
+        <TextBlock Text="Пользователь:"
+                   Margin="5"/>
+        <ComboBox Margin="5"
+                  SelectedItem="{Binding SelectedUser,UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Users}"
+                  DisplayMemberPath="UserProfile.FullName"/>
+        <TextBlock Text="Статус:"
+                   Margin="5"/>
+        <ComboBox Margin="5"
+                  SelectedItem="{Binding SelectedStatus, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Statuses}"
+                  DisplayMemberPath="Title"/>
+        <Button x:Name="ControlButton"
+                Style="{StaticResource ButtonStyle1}"
+                Margin="5,20,5,5"
+                Width="150"
+                Content="Добавить"
+                Click="ControlButton_Click"/>
+    </StackPanel>
 </Page>

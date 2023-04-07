@@ -116,12 +116,14 @@ namespace SalesServices.Views
         {
             _viewModel.OpenManagerWindow(new UserProduct() { DateOfOrder=DateTime.Now });
             _viewModel.UpdateUserProductsList();
+            _viewModel.UpdateUsersList();
         }
 
         private void EditUserProductButton_Click(object sender, RoutedEventArgs e)
         {
             _viewModel.OpenManagerWindow(_viewModel.SelectedUserProduct);
             _viewModel.UpdateUserProductsList();
+            _viewModel.UpdateUsersList();
         }
 
         private void DeleteUserProductButton_Click(object sender, RoutedEventArgs e)
@@ -131,6 +133,7 @@ namespace SalesServices.Views
             {
                 _viewModel.UserProductsService.Delete(_viewModel.SelectedUserProduct);
                 _viewModel.UpdateUserProductsList();
+                _viewModel.UpdateUsersList();
             }
         }
 
@@ -143,12 +146,14 @@ namespace SalesServices.Views
         {
             _viewModel.OpenManagerWindow(new UserSvc() { DateOfOrder = DateTime.Now });
             _viewModel.UpdateUserServicesList();
+            _viewModel.UpdateUsersList();
         }
 
         private void EditUserServiceButton_Click(object sender, RoutedEventArgs e)
         {
             _viewModel.OpenManagerWindow(_viewModel.SelectedUserService);
             _viewModel.UpdateUserServicesList();
+            _viewModel.UpdateUsersList();
         }
 
         private void DeleteUserServiceButton_Click(object sender, RoutedEventArgs e)
@@ -158,6 +163,7 @@ namespace SalesServices.Views
             {
                 _viewModel.UserServicesService.Delete(_viewModel.SelectedUserService);
                 _viewModel.UpdateUserServicesList();
+                _viewModel.UpdateUsersList();
             }
         }
 

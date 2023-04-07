@@ -19,11 +19,11 @@ INSERT INTO [dbo].[Users]
 GO
 
 INSERT INTO [dbo].[UserProfiles]
-           ([LastName],[FirstName],[MiddleName],[DateOfBirth],[Phone],[Email],[DateOfRegister],[NumberOfPurchases],[NumberOfServices],[UserId])
+           ([LastName],[FirstName],[MiddleName],[DateOfBirth],[Phone],[Email],[DateOfRegister],[UserId])
      VALUES
-           ('Аксёнов','Александр','Игоревич','20-03-2003','34534534','jop@gmil.cum','28-03-2023',0,0,1),
-		   ('Аксенов','Александр','Игоревич','20-03-2003','34534534','jop@gmil.cum','28-03-2023',1,0,2),
-		   ('Аксионов','Александр','Игоревич','20-03-2003','34534534','jop@gmil.cum','28-03-2023',0,1,3)
+           ('Аксёнов','Александр','Игоревич','20-03-2003','34534534','jop@gmil.cum','28-03-2023',1),
+		   ('Аксенов','Александр','Игоревич','20-03-2003','34534534','jop@gmil.cum','28-03-2023',2),
+		   ('Аксионов','Александр','Игоревич','20-03-2003','34534534','jop@gmil.cum','28-03-2023',3)
 GO
 
 INSERT INTO [dbo].[ProductCategories]

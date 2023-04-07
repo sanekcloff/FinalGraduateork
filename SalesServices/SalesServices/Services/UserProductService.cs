@@ -17,8 +17,7 @@ namespace SalesServices.Services
         {
             _ctx= ctx;
         }
-
-        public List<UserProduct> GetUserProducts()
+        public ICollection<UserProduct> GetUserProducts()
         {
             return _ctx.UserProducts
                 .Include(up=>up.Product)
