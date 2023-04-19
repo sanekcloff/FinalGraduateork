@@ -50,7 +50,7 @@ namespace SalesServices.Views.EntitiesPages
             if ((_viewModel.Title == null || _viewModel.Title == string.Empty)
                 || (_viewModel.Description == null || _viewModel.Description == string.Empty)
                 || (_viewModel.Cost == 0)
-                || (_viewModel.SelectedProductCategory == null))
+                || (_viewModel.SelectedProductCategories == null))
                 MessageBox.Show("Все поля должны быть заполнены!");
             else
             {

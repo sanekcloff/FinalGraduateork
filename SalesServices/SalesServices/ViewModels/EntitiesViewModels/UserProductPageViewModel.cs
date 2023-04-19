@@ -71,7 +71,7 @@ namespace SalesServices.ViewModels.EntitiesViewModels
                 Quantity=userProduct.Quantity;
             }
             Statuses = new(statusService.GetStatuses());
-            Products= new(productService.GetProducts().OrderBy(p=>p.ProductCategory.Title));
+            Products= new(productService.GetProducts().OrderBy(p=>p.ProductCategories.Select(pd=>pd.Category.Title)));
             Users = new(userService.GetUsers());
             
         }

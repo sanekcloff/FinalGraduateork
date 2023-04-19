@@ -225,7 +225,7 @@ namespace SalesServices.ViewModels
         };
         #endregion
 
-        #region UserProducts properties & fields
+        #region UserServices properties & fields
         private string _userServiceSearch;
         private string _selectedUserServiceSort;
         private string _selectedUserServiceFilther;
@@ -290,7 +290,7 @@ namespace SalesServices.ViewModels
             UpdateUserProductsList();
             UpdateUserServicesList();
 
-            ProductFilthers.AddRange(ctx.ProductCategories.Select(category => category.Title));
+            ProductFilthers.AddRange(ctx.Categories.Select(categories => categories.Title));
             UserFilthers.AddRange(ctx.Roles.Select(role => role.Title));
             UserProductFilthers.AddRange(ctx.Statuses.Select(statuses => statuses.Title));
             UserServiceFilthers.AddRange(ctx.Statuses.Select(statuses=>statuses.Title));
@@ -326,9 +326,12 @@ namespace SalesServices.ViewModels
             if (SelectedProductFilther == ProductFilthers[0])
                 return products;
             else
-                return products
-                    .Where(p => p.ProductCategory.Title == SelectedProductFilther)
+            {
+                products
+                    .Select(p => p.ProductCategories)
                     .ToList();
+                return null;
+            }
         }
         public ICollection<Product> SortProduct(ICollection<Product> products)
         {
@@ -337,9 +340,9 @@ namespace SalesServices.ViewModels
             else if (SelectedProductSort == ProductSortings[2])
                 return products.OrderBy(p => p.CorrectCost).ToList();
             else if (SelectedProductSort == ProductSortings[3])
-                return products.OrderByDescending(p => p.ProductCategory.Title).ToList();
+                return products.OrderByDescending(p => p.ProductCategories.Select(pc=>pc.Category.Title)).ToList();
             else if (SelectedProductSort == ProductSortings[4])
-                return products.OrderBy(p => p.ProductCategory.Title).ToList();
+                return products.OrderBy(p => p.ProductCategories.Select(pc=>pc.Category.Title)).ToList();
             else if (SelectedProductSort == ProductSortings[5])
                 return products.OrderByDescending(p => p.DateOfAdd).ToList();
             else if (SelectedProductSort == ProductSortings[6])

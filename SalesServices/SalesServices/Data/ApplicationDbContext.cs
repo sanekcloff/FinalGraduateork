@@ -30,6 +30,7 @@ namespace SalesServices.Data
         public DbSet<UserProduct> UserProducts { get; set; } = null!;
         public DbSet<UserProfile> UserProfiles { get; set; } = null!;
         public DbSet<UserSvc> UserServices { get; set; } = null!;
+        public DbSet<Category> Categories { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

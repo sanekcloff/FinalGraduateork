@@ -19,11 +19,11 @@ namespace SalesServices.Services
 
         public ICollection<Product> GetProducts()
         {
-            return _ctx.Products.Include(p=>p.ProductCategory).ToList();
+            return _ctx.Products.Include(p=>p.ProductCategories).ToList();
         }
         public Product GetProduct(Product product)
         {
-            return _ctx.Products.Include(p=>p.ProductCategory).SingleOrDefault(p=>p.Equals(product));
+            return _ctx.Products.Include(p=>p.ProductCategories).SingleOrDefault(p=>p.Equals(product));
         }
         public void Insert(Product product) 
         { 

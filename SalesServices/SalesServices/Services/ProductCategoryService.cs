@@ -21,5 +21,9 @@ namespace SalesServices.Services
         {
             return _ctx.ProductCategories.ToList();
         }
+        public ProductCategory? GetProductCategory(ProductCategory productCategory)
+        {
+            return _ctx.ProductCategories.SingleOrDefault(pc=>pc.Equals(productCategory));
+        }
     }
 }

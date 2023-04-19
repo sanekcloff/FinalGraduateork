@@ -21,7 +21,14 @@ namespace SalesServices.ViewModels.EntitiesViewModels
         private UserProfile _userProfile;
 
         public User User { get => _user; set => Set(ref _user, value, nameof(User)); }
-        public string Login { get => _login; set => Set(ref _login, value, nameof(Login)); }
+        public string Login
+        {
+            get => _login;
+            set
+            {
+                Set(ref _login, value, nameof(Login));
+            }
+        }
         public string Password { get => _password; set => Set(ref _password, value, nameof(Password)); }
         public Role SelectedRole { get => _selectedRole; set => Set(ref _selectedRole, value, nameof(SelectedRole)); }
         public UserProfile UserProfile { get => _userProfile; set => Set(ref _userProfile, value, nameof(UserProfile)); }

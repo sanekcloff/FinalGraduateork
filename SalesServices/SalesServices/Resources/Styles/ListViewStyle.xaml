@@ -38,7 +38,7 @@
                                                x:Name="Image"/>
                                         <StackPanel Orientation="Vertical"
                                                     Grid.Column="2">
-                                            <TextBlock Text="{Binding FullName}"
+                                            <TextBlock Text="{Binding Title}"
                                                        Foreground="{StaticResource TextColor}"
                                                        TextWrapping="Wrap"/>
                                             <TextBlock Text="{Binding Description}"

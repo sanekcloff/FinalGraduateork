@@ -21,7 +21,8 @@ namespace SalesServices.Services
         {
             return _ctx.UserProducts
                 .Include(up=>up.Product)
-                    .ThenInclude(p=>p.ProductCategory)
+                    .ThenInclude(p=>p.ProductCategories)
+                        .ThenInclude(pc=>pc.Category)
                 .Include(up=>up.User)
                     .ThenInclude(u=>u!.Role)
                 .Include(up => up.User)
@@ -30,11 +31,12 @@ namespace SalesServices.Services
                 .ToList();
         }
 
-        public UserProduct GetUserProduct(UserProduct userProduct)
+        public UserProduct? GetUserProduct(UserProduct userProduct)
         {
             return _ctx.UserProducts
                 .Include(up => up.Product)
-                    .ThenInclude(p => p.ProductCategory)
+                    .ThenInclude(p => p.ProductCategories)
+                        .ThenInclude(pc => pc.Category)
                 .Include(up => up.User)
                     .ThenInclude(u => u.Role)
                 .Include(up => up.User)

@@ -34,10 +34,15 @@ namespace SalesServices.ViewModels.EntitiesViewModels
             get => _description;
             set => Set(ref _description, value, nameof(Description)); 
         }
-        public decimal CostPerHour 
-        { 
+        public decimal CostPerHour
+        {
             get => _costPerHour;
-            set => Set(ref _costPerHour, value, nameof(CostPerHour));
+            set
+            {
+                if (value < 0 || value == null)
+                    value = 0;
+                Set(ref _costPerHour, value, nameof(CostPerHour));
+            }
         }
 
         public ServicePageViewModel(Service service, ServiceService entityService)

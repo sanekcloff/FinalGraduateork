@@ -13,6 +13,7 @@ namespace SalesServices.Entities
         {
             UserProducts = new HashSet<UserProduct>();
             FavoriteUserProducts= new HashSet<FavoriteUserProduct>();
+            ProductCategories = new HashSet<ProductCategory>();
         }
 
         public int ID { get; set; }
@@ -24,15 +25,11 @@ namespace SalesServices.Entities
         public decimal Discount { get; set; }
         public DateTime DateOfAdd { get; set; }
 
-        public int ProductCategoryId { get; set; }
-
-        public ProductCategory ProductCategory { get; set; } = null!;
-
         public ICollection<UserProduct> UserProducts { get; set; } = null!;
         public ICollection<FavoriteUserProduct> FavoriteUserProducts { get; set; } = null!;
+        public ICollection<ProductCategory> ProductCategories { get; set; } = null!;
 
         [NotMapped]
-        public string FullName { get => $"{ProductCategory.Title} : {Title}"; }
         public string CorrectPicturePath 
         {
             get => (Picture == string.Empty || Picture == null) 

@@ -18,7 +18,7 @@ namespace SalesServices.ViewModels.EntitiesViewModels
 
         private string _title;
         private string _description;
-        private ProductCategory _selectedProductCategory;
+        private List<ProductCategory> _selectedProductCategories;
         private decimal _cost;
         private decimal _discount;
         private string _selectedPicture;
@@ -49,12 +49,12 @@ namespace SalesServices.ViewModels.EntitiesViewModels
                 Set(ref _description, value, nameof(Description));
             }
         }
-        public ProductCategory SelectedProductCategory
+        public List<ProductCategory> SelectedProductCategories
         {
-            get => _selectedProductCategory;
+            get => _selectedProductCategories;
             set
             {
-                Set(ref _selectedProductCategory, value, nameof(SelectedProductCategory));
+                Set(ref _selectedProductCategories, value, nameof(SelectedProductCategories));
             }
         }
         public decimal Cost
@@ -106,7 +106,7 @@ namespace SalesServices.ViewModels.EntitiesViewModels
                 Description= product.Description;
                 SelectedPicture = product.Picture;
                 Cost= product.Cost;
-                SelectedProductCategory = product.ProductCategory;
+                SelectedProductCategories = product.ProductCategories.ToList();
             }
             Discount = product.Discount;
             EntityService = entityService;
@@ -123,7 +123,7 @@ namespace SalesServices.ViewModels.EntitiesViewModels
             Product.Description = Description;
             Product.Discount = Discount;
             Product.Cost= Cost;
-            Product.ProductCategory = SelectedProductCategory;
+            Product.ProductCategories = SelectedProductCategories;
             Product.Picture = SelectedPicture.Substring(SelectedPicture.LastIndexOf('\\') + 1);
         }
     }
