@@ -36,7 +36,7 @@ namespace SalesServices.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("SalesServices.Entities.FavoriteUserProduct", b =>
@@ -62,7 +62,7 @@ namespace SalesServices.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FavoriteUserProducts");
+                    b.ToTable("FavoriteUserProducts", (string)null);
                 });
 
             modelBuilder.Entity("SalesServices.Entities.Product", b =>
@@ -95,7 +95,7 @@ namespace SalesServices.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("SalesServices.Entities.ProductCategory", b =>
@@ -118,7 +118,7 @@ namespace SalesServices.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductCategories");
+                    b.ToTable("ProductCategories", (string)null);
                 });
 
             modelBuilder.Entity("SalesServices.Entities.Role", b =>
@@ -135,7 +135,7 @@ namespace SalesServices.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("SalesServices.Entities.Service", b =>
@@ -162,7 +162,7 @@ namespace SalesServices.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Services");
+                    b.ToTable("Services", (string)null);
                 });
 
             modelBuilder.Entity("SalesServices.Entities.Status", b =>
@@ -179,7 +179,7 @@ namespace SalesServices.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Statuses");
+                    b.ToTable("Statuses", (string)null);
                 });
 
             modelBuilder.Entity("SalesServices.Entities.User", b =>
@@ -205,7 +205,7 @@ namespace SalesServices.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("SalesServices.Entities.UserProduct", b =>
@@ -242,7 +242,7 @@ namespace SalesServices.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserProducts");
+                    b.ToTable("UserProducts", (string)null);
                 });
 
             modelBuilder.Entity("SalesServices.Entities.UserProfile", b =>
@@ -287,7 +287,7 @@ namespace SalesServices.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("UserProfiles");
+                    b.ToTable("UserProfiles", (string)null);
                 });
 
             modelBuilder.Entity("SalesServices.Entities.UserSvc", b =>
@@ -321,7 +321,7 @@ namespace SalesServices.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserServices");
+                    b.ToTable("UserServices", (string)null);
                 });
 
             modelBuilder.Entity("SalesServices.Entities.FavoriteUserProduct", b =>

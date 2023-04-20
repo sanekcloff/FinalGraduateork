@@ -326,12 +326,7 @@ namespace SalesServices.ViewModels
             if (SelectedProductFilther == ProductFilthers[0])
                 return products;
             else
-            {
-                products
-                    .Select(p => p.ProductCategories)
-                    .ToList();
-                return null;
-            }
+                return products.Where(p => p.ProductCategories.Any(pc => pc.Category.Title == SelectedProductFilther)).ToList();
         }
         public ICollection<Product> SortProduct(ICollection<Product> products)
         {
